@@ -7,10 +7,12 @@
         <title>TravelMates</title>
         <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 
-        <!-- Google Font: Source Sans Pro -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <!-- Google Font: JetBrains Mono -->
+        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+        <!-- Bootstrap Icons -->
+        <link rel="stylesheet" href="plugins/bootstrap-icons/font/bootstrap-icons.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Tempusdominus Bootstrap 4 -->
@@ -38,7 +40,7 @@
                 <!-- Left navbar links -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="bi bi-list-nested"></i></a>
                     </li>      
                 </ul>
 
@@ -49,23 +51,23 @@
                         <?php
                         echo isset($_COOKIE['dark']) ?
                                 '<a class="nav-link" href="/light" role="button">
-          <i class="text fas fa-sun"></i>
+          <i class="bi bi-sun-fill"></i>
         </a>      
       </li>' :
                                 '   <a class="nav-link" href="/dark" role="button">
-          <i class="text fas fa-moon"></i>
+          <i class="bi bi-moon-fill"></i>
         </a>      
       </li>';
                         ?>
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button">
-                            <i class="fas fa-bell"></i>
+                            <i class="bi bi-bell-fill"></i>
                         </a>
                     </li>   
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo isset($_SESSION['user']['id_usuario']) ? '/logout' : '/login'; ?>" role="button">
                             <?php if (isset($_SESSION['user']['id_usuario'])) { ?>
-                                <i class="text-danger fas fa-sign-out-alt"></i> 
+                                <i class="text-danger bi bi-sign-out"></i> 
                                 <?php
                             } else {
                                 ?>

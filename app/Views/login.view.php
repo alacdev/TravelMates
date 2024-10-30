@@ -48,7 +48,7 @@
 
                     <div class="text-center mt-3">
                         <p class="mb-0">
-                            <a href="register.html" class="text-center">¿Todavía no estás registrado?</a>
+                            <a href="/register" class="text-center">¿Todavía no estás registrado?</a>
                         </p>
                     </div>
                 </div>

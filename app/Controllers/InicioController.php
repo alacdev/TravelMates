@@ -18,6 +18,11 @@ class InicioController extends \Com\TravelMates\Core\BaseController {
 
     }
 
+    public function showRegister() {
+        $this->view->show('register.view.php');
+
+    }
+
     public function processLogin(array $post) {
         $userModel = new \Com\TravelMates\Models\UsuarioSistemaModel();
         $user = $userModel->getUserByEmail($post['email']);
@@ -38,6 +43,28 @@ class InicioController extends \Com\TravelMates\Core\BaseController {
             $_SESSION['error_login'] = 'Datos incorrectos';
             header('location:/login');
         }
+    }
+    
+    public function processRegister(array $post) {
+        // $userModel = new \Com\TravelMates\Models\UsuarioSistemaModel();
+        // $user = $userModel->getUserByEmail($post['email']);
+        // if ($user != null) {
+        //     if ($user['id_estado'] == 1) {
+        //         if (password_verify($post['pass'], $user['pass'])) {
+        //             $_SESSION['user'] = $user;
+        //             header('location:/');
+        //         } else {
+        //             $_SESSION['error_login'] = 'Datos incorrectos';
+        //             header('location:/login');
+        //         }
+        //     } else {
+        //         $_SESSION['error_login'] = 'Datos incorrectos';
+        //         header('location:/login');
+        //     }
+        // } else {
+        //     $_SESSION['error_login'] = 'Datos incorrectos';
+        //     header('location:/login');
+        // }
     }
 
     public function logout() {
