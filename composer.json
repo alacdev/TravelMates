@@ -1,0 +1,15 @@
+{
+    "name": "com/travelmates",
+    "description": "Proyecto final Hugo Alén",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Com\\TravelMates\\": "app/"
+        }
+    },
+    "require": {
+        "steampixel/simple-php-router": "^0.7.1",
+        "vlucas/phpdotenv": "^5.5"
+    }
+}
