@@ -47,8 +47,17 @@
                                 <i class="bi bi-person-lock nav-icon"></i>
                                 <p>Login</p>
                             </a>
-                        </li>                                                                       
+                        </li>      
+                        
                 </ul>
+                <?php if (isset($_SESSION['user'])) { ?>
+                <li class="nav-item">
+                            <a href="/logout" class="nav-link">
+                                <i class="text-danger bi bi-box-arrow-right nav-icon"></i>
+                                <p class="text-danger">Cerrar sesión</p>
+                            </a>
+                </li>
+                <?php } ?>
             </li>
        
     </ul>

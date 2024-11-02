@@ -7,8 +7,8 @@
         <title>TravelMates</title>
         <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 
-        <!-- Google Font: JetBrains Mono -->
-        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+        <!-- Google Font: Source Sans Pro -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
         <!-- Bootstrap Icons -->
@@ -63,20 +63,6 @@
                         <a class="nav-link" href="#" role="button">
                             <i class="bi bi-bell-fill"></i>
                         </a>
-                    </li>   
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo isset($_SESSION['user']['id_usuario']) ? '/logout' : '/login'; ?>" role="button">
-                            <?php if (isset($_SESSION['user']['id_usuario'])) { ?>
-                                <i class="text-danger bi bi-sign-out"></i> 
-                                <?php
-                            } else {
-                                ?>
-                                <i class="text-danger fas fa-sign-in-alt"></i> 
-
-                                <?php
-                            }
-                            ?>
-                        </a>        
                     </li>         
                 </ul>
             </nav>
@@ -96,7 +82,7 @@
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
                             <img                                
-                                src="<?php echo isset($_SESSION['user']['foto']) ? $_SESSION['user']['foto'] : 'assets/img/user2-160x160.jpg' ?> " 
+                                src="<?php echo isset($_SESSION['user']['foto']) ? $_SESSION['user']['foto'] : 'assets/img/defaultUser.png' ?> " 
                                 class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info">

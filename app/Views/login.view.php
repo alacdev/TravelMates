@@ -19,7 +19,6 @@
             <div class="card">
                 <div class="card-body login-card-body">
                     <p class="login-box-msg">¡Bienvenido de nuevo!</p>
-
                     <form action="/login" method="post">
                         <div class="input-group mb-3">
                             <input type="email" name="email" class="form-control" placeholder="Correo@dominio.com" required>
@@ -37,6 +36,7 @@
                                 </div>
                             </div>
                         </div>
+                        <p class="login-box-msg text-danger"><?php echo isset($_SESSION['error_login']) ? $_SESSION['error_login'] : '' ?></p>
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center">
                                 <div class="col-5">
