@@ -22,7 +22,7 @@ class InicioController extends \Com\TravelMates\Core\BaseController {
     }
 
     public function processLogin(array $post) {
-        $userModel = new \Com\TravelMates\Models\UsuarioSistemaModel();
+        $userModel = new \Com\TravelMates\Models\UsuarioModel();
         $user = $userModel->getUserByEmail($post['email']);
         if ($user != null) {
             if (password_verify($post['pass'], $user['pass'])) {
@@ -48,7 +48,7 @@ class InicioController extends \Com\TravelMates\Core\BaseController {
             unset($post['pass']);
             unset($post['confirm_pass']);
             $post ['pass'] = $hashpass;
-            $userModel = new \Com\TravelMates\Models\UsuarioSistemaModel();
+            $userModel = new \Com\TravelMates\Models\UsuarioModel();
             if ($userModel->addUser($post)) {
                 $user = $userModel->getUserByEmail($post['email']);
                 $_SESSION['user'] = $user;
@@ -61,7 +61,7 @@ class InicioController extends \Com\TravelMates\Core\BaseController {
     }
 
     private function checkRegisterForm(array $post): array {
-        $userModel = new \Com\TravelMates\Models\UsuarioSistemaModel();
+        $userModel = new \Com\TravelMates\Models\UsuarioModel();
         $errores = [];
         if (empty($post['username'])) {
             $errores['username'] = 'Debe introducir un nombre de usuario.';
@@ -101,12 +101,12 @@ class InicioController extends \Com\TravelMates\Core\BaseController {
             $errores['confirm_pass'] = 'Las contraseñas deben coincidir.';
         }
 
-        if (empty($post['nacionalidad'])) {
-            $errores['nacionalidad'] = 'Debe introducir un país';
-        } else
-        if (!preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]{1,50}$/u', $post['nacionalidad'])) {
-            $errores['nacionalidad'] = 'Este campo solo puede contener letras, incluyendo acentos y la letra ñ.';
-        }
+        if (empty($post['residencia'])) {
+            $errores['residencia'] = 'Debe introducir un país';
+        } 
+//        else if (!preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]{1,50}$/u', $post['residencia'])) {
+//            $errores['residencia'] = 'Este campo solo puede contener letras, incluyendo acentos y la letra ñ.';
+//        }
 
         if (!preg_match('/^[a-zA-Z]{1,50}$/', $post['sexo'])) {
             $errores['sexo'] = 'Debe seleccionar una opción de la lista.';

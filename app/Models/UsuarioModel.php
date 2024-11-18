@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace Com\TravelMates\Models;
 
-class UsuarioSistemaModel extends \Com\TravelMates\Core\BaseDbModel {
+class UsuarioModel extends \Com\TravelMates\Core\BaseDbModel {
 
     function getAll(): array {
         $stmt = $this->pdo->query('SELECT * FROM usuarios');
         return $stmt->fetchAll();
     }
-
-    function getUserById(int $id): array {
-        $stmt = $this->pdo->prepare('SELECT * FROM usuarios WHERE id_usuario = ?');
+    
+    function getUserById(int $id) {
+        $stmt = $this->pdo->prepare('SELECT * FROM usuarios WHERE id = ?');
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
 
-    function getUserByEmail(string $email): array {
+    function getUserByEmail(string $email) {
         $stmt = $this->pdo->prepare('SELECT * FROM usuarios WHERE email = ?');
         $stmt->execute([$email]);
         return $stmt->fetch();
     }
     
-    function getUserByUsername(string $username): array {
+    function getUserByUsername(string $username) {
         $stmt = $this->pdo->prepare('SELECT * FROM usuarios WHERE username = ?');
         $stmt->execute([$username]);
         return $stmt->fetch();
@@ -35,12 +35,12 @@ class UsuarioSistemaModel extends \Com\TravelMates\Core\BaseDbModel {
     }
 
     function addUser(array $post): bool {
-        $stmt = $this->pdo->prepare('INSERT INTO usuarios (nombre_completo, username, sexo, pass, nacionalidad, email) values (?,?,?,?,?,?)');
+        $stmt = $this->pdo->prepare('INSERT INTO usuarios (nombre_completo, username, sexo, pass, residencia, email) values (?,?,?,?,?,?)');
         $stmt->execute([
             $post['nombre_completo'],
             $post['username'], $post['sexo'],
             $post['pass'],
-            $post['nacionalidad'],
+            $post['residencia'],
             $post['email']
         ]);
         if ($stmt->rowCount() > 0) {

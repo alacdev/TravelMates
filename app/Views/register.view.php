@@ -5,10 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Registro</title>
+        <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
         <!-- AdminLTE CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
         <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="assets/css/loginregister.css">
     </head>
     <body id="register" class="hold-transition register-page">
         <div class="register-box">
@@ -80,15 +82,18 @@
                             <p class="login-box-msg text-danger"><?php echo isset($_SESSION['errores_register']['confirm_pass']) ? $_SESSION['errores_register']['confirm_pass'] : '' ?></p>
                         <?php } ?>
                         <div class="input-group mb-3">
-                            <input type="text" name="nacionalidad" class="form-control" placeholder="Nacionalidad" value="<?php echo isset($_POST['nacionaliad']) ? $_POST['nacionalidad'] : '' ?>" required>
+                            <input type="text" name="residencia" id="residencia" class="form-control" placeholder="Lugar actual de residencia" value="<?php echo isset($_POST['residencia']) ? $_POST['residencia'] : '' ?>" required>
                             <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-flag"></span>
+                                <div class="input-group-text">                                    
+                                    <span class="fas fa-location-arrow"></span>
                                 </div>
-                            </div>
+                            </div> 
+                            <ul id="sugerencias" 
+                                class="list-group position-absolute w-100 mt-1">
+                            </ul>
                         </div>
-                        <?php if (isset($_SESSION['errores_register']['nacionalidad'])) { ?>
-                            <p class="login-box-msg text-danger"><?php echo isset($_SESSION['errores_register']['nacionalidad']) ? $_SESSION['errores_register']['nacionalidad'] : '' ?></p>
+                        <?php if (isset($_SESSION['errores_register']['residencia'])) { ?>
+                            <p class="login-box-msg text-danger"><?php echo isset($_SESSION['errores_register']['residencia']) ? $_SESSION['errores_register']['residencia'] : '' ?></p>
                         <?php } ?>
                         <div class="input-group mb-3">
                             <select name="sexo" class="form-control" required>
@@ -131,5 +136,42 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Bootstrap 4 -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- OpenCage API -->
+        <script>
+        const API_KEY = "6b94dd63f15a47239d419fbc1578041f";
+        const residenciaInput = document.getElementById("residencia");
+        const sugerenciasList = document.getElementById("sugerencias");
+
+        residenciaInput.addEventListener("input", function () {
+            const query = residenciaInput.value;
+
+            if (query.length > 2) { // Empieza a buscar después de 2 caracteres
+                fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(query)}&key=${API_KEY}&language=es&limit=5`)
+                    .then(response => response.json())
+                    .then(data => {
+                        sugerenciasList.innerHTML = ""; // Limpia sugerencias previas
+                        data.results.forEach(result => {
+                            const li = document.createElement("li");
+                            li.textContent = result.formatted;
+                            li.addEventListener("click", () => {
+                                residenciaInput.value = result.formatted;
+                                sugerenciasList.innerHTML = ""; // Limpia sugerencias
+                            });
+                            sugerenciasList.appendChild(li);
+                        });
+                    })
+                    .catch(error => console.error("Error:", error));
+            } else {
+                sugerenciasList.innerHTML = ""; // Limpia si el input es corto
+            }
+        });
+        
+        // Oculta la lista si se hace clic fuera
+    document.addEventListener("click", (e) => {
+        if (!sugerenciasList.contains(e.target) && e.target !== residenciaInput) {
+            sugerenciasList.classList.add("d-none");
+        }
+    });
+    </script>
     </body>
 </html>

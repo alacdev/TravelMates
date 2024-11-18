@@ -5,20 +5,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Iniciar sesión</title>
+        <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
         <!-- AdminLTE CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">        
         <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="assets/css/loginregister.css">
     </head>
     <body id="login" class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
-                <a href="#"><b>Travel</b>Mates</a>
+<!--                <a href="#"><b>Travel</b>Mates</a>-->
+                <!--<img src="assets/img/TravelMates.png" alt="alt"/>-->                
             </div>
             <!-- /.login-logo -->
             <div class="card">
                 <div class="card-body login-card-body">
-                    <p class="login-box-msg">¡Bienvenido de nuevo!</p>
+                    <p class="login-box-msg">¡Bienvenido a TravelMates!</p>
                     <form action="/login" method="post">
                         <div class="input-group mb-3">
                             <input type="email" name="email" class="form-control" placeholder="Correo@dominio.com" required>

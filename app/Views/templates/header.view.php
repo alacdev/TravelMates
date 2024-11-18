@@ -86,8 +86,8 @@
                                 class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info">
-                            <?php if (isset($_SESSION['user']['nombre_completo']) && !empty($_SESSION['user']['nombre_completo'])): ?>
-                                <a href="#" class="d-block">
+                            <?php if (isset($_SESSION['user']['username']) && !empty($_SESSION['user']['username'])): ?>
+                                <a href="/cuenta" class="d-block">
                                     <i><?php echo htmlspecialchars($_SESSION['user']['nombre_completo']); ?></i>
                                 </a>
                             <?php else: ?>
