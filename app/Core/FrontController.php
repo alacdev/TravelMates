@@ -39,6 +39,11 @@ class FrontController {
                 $controlador = new \Com\TravelMates\Controllers\MapaController();
                 $controlador->addMarcador();
             }, 'post');
+            
+            Route::add('/chat', function () {
+                $controlador = new \Com\TravelMates\Controllers\ChatController();
+                $controlador->show();
+            }, 'get');
         }
 
         Route::add('/login', function () {

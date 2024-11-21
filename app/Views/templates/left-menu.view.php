@@ -19,7 +19,7 @@
                 </a>
             </li>    
             <li class="nav-item">
-                <a href="/mensajes" class="nav-link">
+                <a href="/chat" class="nav-link">
                     <i class="nav-icon bi bi-chat-dots"></i>
                     <p>
                         Mensajes
@@ -27,38 +27,8 @@
                 </a>
             </li> 
         <?php } ?>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon bi bi-database"></i>
-                <p>
-                    Demos
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="/demos/usuarios-sistema" class="nav-link <?php echo isset($seccion) && $seccion === '/demos/usuarios-sistema' ? 'active' : ''; ?>">
-                        <i class="bi bi-person nav-icon"></i>
-                        <p>Usuarios del Sistema</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/demos/usuarios-sistema/add" class="nav-link <?php echo isset($seccion) && $seccion === '/demos/usuarios-sistema/edit' ? 'active' : ''; ?>">
-                        <i class="bi bi-person-plus nav-icon"></i>
-                        <p>Alta usuario</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/demos/login" class="nav-link <?php echo isset($seccion) && $seccion === '/demos/login' ? 'active' : ''; ?>">
-                        <i class="bi bi-person-lock nav-icon"></i>
-                        <p>Login</p>
-                    </a>
-                </li>      
-
-            </ul>
-            <?php if (isset($_SESSION['user'])) { ?>
+        
+        <?php if (isset($_SESSION['user'])) { ?>
             <li class="nav-item">
                 <a href="/logout" class="nav-link">
                     <i class="text-danger bi bi-box-arrow-right nav-icon"></i>
@@ -66,8 +36,6 @@
                 </a>
             </li>
         <?php } ?>
-        </li>
-
     </ul>
 </nav>
 <!-- /.sidebar-menu -->

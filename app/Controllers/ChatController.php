@@ -2,17 +2,16 @@
 
 namespace Com\TravelMates\Controllers;
 
-class UsuarioController extends \Com\TravelMates\Core\BaseController {
+class ChatController extends \Com\TravelMates\Core\BaseController {
 
     public function show() {  
-        $usermodel = new \Com\TravelMates\Models\UsuarioModel();
+        
         $data = array(
             'titulo' => 'Usuarios',
-            'breadcrumb' => ['Gestión de usuarios'],
-            'usuarios' => $usermodel->getAll()
-        );
+            'breadcrumb' => ['Gestión de usuarios']
+            );
 
-        $this->view->showViews(array('templates/header.view.php', 'usuarios.view.php', 'templates/footer.view.php'), $data);
+        $this->view->showViews(array('templates/header.view.php', 'chat.view.php', 'templates/footer.view.php'), $data);
     }
 
 }
