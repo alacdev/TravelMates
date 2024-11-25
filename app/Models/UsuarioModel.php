@@ -29,6 +29,81 @@ class UsuarioModel extends \Com\TravelMates\Core\BaseDbModel {
         return $stmt->fetch();
     }
 
+    function obtenerUsuariosCompatibles (int $id_usuario) {
+        $stmt = $this->pdo->prepare('SELECT intereses FROM intereses WHERE id_usuario = ?');
+        $stmt->execute([$id_usuario]);
+        $result = $stmt->get_result();
+
+        $intereses_usuario = $result->fetch_all(MYSQLI_ASSOC);
+        $intereses_usuario = array_column($intereses_usuario, 'interes'); // Convertir los intereses en un array simple
+
+        $usuarios_compatibles = [];
+
+        // Buscar usuarios con intereses similares
+        foreach ($intereses_usuario as $interes) {
+            $stmt = $this->pdo->prepare('SELECT id_usuario FROM intereses WHERE interes = ? AND id_usuario != ?');
+            $stmt->execute([$interes, $id_usuario]);
+            $result = $stmt->get_result();
+
+            while ($row = $result->fetch_assoc()) {
+                $id_usuario_compatible = $row['id_usuario'];
+                if (isset($usuarios_compatibles[$id_usuario_compatible])) {
+                    $usuarios_compatibles[$id_usuario_compatible]++;
+                } else {
+                    $usuarios_compatibles[$id_usuario_compatible] = 1;
+                }
+            }
+        }
+        arsort($usuarios_compatibles)
+        return $usuarios_compatibles;
+    }
+
+    function enviarSolicitudAmistad(int $id_emisor, int $id_receptor) {
+        $stmt = $this->pdo->prepare('INSERT INTO solicitudes_amistad (id_emisor, id_receptor) VALUES (?, ?)');
+        $stmt->execute([$id_emisor, $id_receptor]);
+    
+        if ($stmt->affected_rows > 0) {
+            echo "Solicitud de amistad enviada.";
+        } else {
+            echo "Error al enviar la solicitud.";
+        }
+    }
+
+    function aceptarSolicitudAmistad($id_solicitud) {
+        $stmt = $this->pdo->prepare('SELECT id_emisor, id_receptor FROM solicitudes_amistad WHERE id_solicitud = ? AND estado = ?');
+        $stmt->execute([$id_solicitud, "pendiente"]);
+        $result = $stmt->get_result();
+    
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $id_usuario_envia = $row['id_emisor'];
+            $id_usuario_recibe = $row['id_receptor'];
+    
+            // Actualizar el estado de la solicitud
+            $stmt = $this->pdo->prepare('UPDATE solicitudes_amistad SET estado = ? WHERE id_solicitud = ?');
+            $stmt->execute(["aceptada", $id_solicitud]);
+    
+            // Insertar la amistad en la tabla amistades
+            $stmt = $this->pdo->prepare('INSERT INTO amistades (id_usuario1, id_usuario2) VALUES (?, ?)');
+            $stmt->execute([$id_emisor, $id_receptor]);
+    
+            echo "Solicitud de amistad aceptada.";
+        } else {
+            echo "Solicitud no encontrada o ya procesada.";
+        }
+    }
+    
+    function rechazarSolicitudAmistad($id_solicitud) {
+        $stmt = $this->pdo->prepare('UPDATE solicitudes_amistad SET estado = ? WHERE id_solicitud = ?');
+        $stmt->execute(["rechazada", $id_solicitud]);
+        
+        if ($stmt->affected_rows > 0) {
+            echo "Solicitud de amistad rechazada.";
+        } else {
+            echo "Solicitud no encontrada o ya procesada.";
+        }
+    }
+
     function size(): int {
         $stmt = $this->pdo->query('SELECT * FROM usuarios');
         return count($stmt->fetchAll());

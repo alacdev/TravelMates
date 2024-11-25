@@ -24,10 +24,10 @@
                     <p class="login-box-msg">¡Bienvenido a TravelMates!</p>
                     <form action="/login" method="post">
                         <div class="input-group mb-3">
-                            <input type="email" name="email" class="form-control" placeholder="Correo@dominio.com" required>
+                            <input type="text" name="username" class="form-control" placeholder="Nombre de usuario" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
+                                    <span class="fas fa-at"></span>
                                 </div>
                             </div>
                         </div>

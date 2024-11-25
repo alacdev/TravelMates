@@ -13,7 +13,7 @@
         <img src="user1.jpg" alt="User 1" class="avatar">
         <div class="conversation-info">
           <h4>John Doe</h4>
-          <p>Último mensaje...</p>
+          <p>Último mensaje mbappe...</p>
         </div>
       </div>
       <div class="conversation">

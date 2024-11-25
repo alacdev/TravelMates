@@ -2,12 +2,18 @@
 
 namespace Com\TravelMates\Controllers;
 
+use Com\TravelMates\Models\PublicacionesModel;
+
 class InicioController extends \Com\TravelMates\Core\BaseController {
 
     public function index() {
+        $model = new PublicacionesModel();
+        $publicaciones = $model->getAll();
+
         $data = array(
             'titulo' => 'Página de inicio',
-            'breadcrumb' => ['Inicio']
+            'breadcrumb' => ['Inicio'],
+            'publicaciones' => $publicaciones
         );
 
         $this->view->showViews(array('templates/header.view.php', 'inicio.view.php', 'templates/footer.view.php'), $data);
@@ -23,7 +29,7 @@ class InicioController extends \Com\TravelMates\Core\BaseController {
 
     public function processLogin(array $post) {
         $userModel = new \Com\TravelMates\Models\UsuarioModel();
-        $user = $userModel->getUserByEmail($post['email']);
+        $user = $userModel->getUserByUsername($post['username']);
         if ($user != null) {
             if (password_verify($post['pass'], $user['pass'])) {
                 $_SESSION['user'] = $user;
