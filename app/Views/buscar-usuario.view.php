@@ -14,15 +14,16 @@
   </div>  
   <div class="usuarios">
     <!-- Búsqueda -->
-    <?php isset ($usuariosBusqueda) { ?>
-      <?php foreach ($usuariosBusqueda as $usuario) { ?>
-        <div class="usuario-busqueda">
-          <img src="<?php echo $usuario['url_img'] ?>" alt="Foto de perfil de <?php echo $usuario['username'] ?>" class="avatar">
-          <p><?php echo $usuario['username'] ?></p>
-          <p><?php echo $usuario['nombre_completo'] ?></p>
-        </div>
-      <?php } ?>
+    <?php if (isset($usuariosBusqueda)) { ?>
+        <?php foreach ($usuariosBusqueda as $usuario) { ?>
+            <div class="usuario-busqueda">
+                <img src="<?php echo $usuario['url_img']; ?>" alt="Foto de perfil de <?php echo $usuario['username']; ?>" class="avatar">
+                <p><?php echo $usuario['username']; ?></p>
+                <p><?php echo $usuario['nombre_completo']; ?></p>
+            </div>
+        <?php } ?>
     <?php } ?>
+
 
     <!-- Usuarios recomendados -->
     <div class="usuarios-recomendados">

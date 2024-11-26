@@ -9,7 +9,7 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController {
         $data = array(
             'titulo' => 'Usuarios',
             'breadcrumb' => ['Gestión de usuarios'],
-            'usuarios' => $usermodel->getAll()
+            'usuarios' => $usermodel->obtenerTodos()
         );
 
         $this->view->showViews(array('templates/header.view.php', 'usuarios.view.php', 'templates/footer.view.php'), $data);
@@ -20,7 +20,7 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController {
         $data = array(
             'titulo' => 'Usuarios',
             'breadcrumb' => ['Gestión de usuarios'],
-            'usuarios' => $usermodel->getAll()
+            'usuarios' => $usermodel->obtenerTodos()
         );
 
         $this->view->showViews(array('templates/header.view.php', 'gestion-usuarios.view.php', 'templates/footer.view.php'), $data);
@@ -38,7 +38,7 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController {
     }
 
     public function buscarUsuarios(array $post) {  
-        string $busqueda = $post['busqueda'];
+        $busqueda = $post['busqueda'];
         $usermodel = new \Com\TravelMates\Models\UsuarioModel();
         $data = array(
             'titulo' => 'Usuarios',

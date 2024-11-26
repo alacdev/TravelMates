@@ -3,7 +3,7 @@
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
             <a href="/" class="nav-link">
-                <i class="nav-icon bi bi-house"></i>
+                <i class="nav-icon fa fa-home"></i>
                 <p>
                     Inicio
                 </p>
@@ -13,7 +13,7 @@
             <?php if ($_SESSION['user']['username'] == "admin") { ?>
                 <li class="nav-item">
                     <a href="/gestion-usuarios" class="nav-link">
-                        <i class="nav-icon fa fa-times"></i>
+                        <i class="nav-icon fa fa-user-cog"></i>
                         <p>
                             Gestión usuarios
                         </p>
@@ -31,7 +31,7 @@
             </li> 
             <li class="nav-item">
                 <a href="/mapa" class="nav-link">
-                    <i class="nav-icon bi bi-map"></i>
+                    <i class="nav-icon fa fa-map"></i>
                     <p>
                         Mapa
                     </p>
@@ -39,7 +39,7 @@
             </li>    
             <li class="nav-item">
                 <a href="/chat" class="nav-link">
-                    <i class="nav-icon bi bi-chat-dots"></i>
+                    <i class="nav-icon fa fa-comment-dots"></i>
                     <p>
                         Mensajes
                     </p>
@@ -50,7 +50,7 @@
         <?php if (isset($_SESSION['user'])) { ?>
             <li class="nav-item">
                 <a href="/logout" class="nav-link">
-                    <i class="text-danger bi bi-box-arrow-right nav-icon"></i>
+                    <i class="text-danger fa fa-arrow-alt-circle-right nav-icon"></i>
                     <p class="text-danger">Cerrar sesión</p>
                 </a>
             </li>

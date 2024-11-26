@@ -7,7 +7,7 @@ use Com\TravelMates\Models\PublicacionesModel;
 class InicioController extends \Com\TravelMates\Core\BaseController {
 
     public function inicio() {
-        $model = new PublicacionesModel();
+        $model = new \Com\TravelMates\Models\PublicacionModel();
         $publicaciones = $model->getAll();
         //TODO: Hacer que solo se busquen las de la gente que sigue ese usuario.
 
@@ -30,7 +30,7 @@ class InicioController extends \Com\TravelMates\Core\BaseController {
 
     public function iniciarSesion(array $post) {
         $userModel = new \Com\TravelMates\Models\UsuarioModel();
-        $user = $userModel->getUserByUsername($post['username']);
+        $user = $userModel->obtenerUsuarioPorUsername($post['username']);
         if ($user != null) {
             if (password_verify($post['pass'], $user['pass'])) {
                 $_SESSION['user'] = $user;
@@ -73,7 +73,7 @@ class InicioController extends \Com\TravelMates\Core\BaseController {
 
             $userModel = new \Com\TravelMates\Models\UsuarioModel();
             if ($userModel->addUser($post)) {
-                $user = $userModel->getUserByEmail($post['email']);
+                $user = $userModel->obtenerUsuarioPorEmaile($post['email']);
                 $_SESSION['user'] = $user;
                 header('location:/');
             } else {
@@ -93,7 +93,7 @@ class InicioController extends \Com\TravelMates\Core\BaseController {
         if (!preg_match('/^[a-zA-Z0-9]{1,20}$/', $_POST['username'])) {
             $errores['username'] = 'El nombre de usuario debe contener únicamente letras y/o números.';
         } else
-        if ($userModel->getUserByUsername($post['username']) != null) {
+        if ($userModel->obtenerUsuarioPorUsername($post['username']) != null) {
             $errores['username'] = 'El nombre de usuario ya está en uso.';
         }
 

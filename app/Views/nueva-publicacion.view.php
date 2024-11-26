@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="assets/css/nueva-publicacion.css">
     </head>
     <body>
-        <form action="/nueva-publicacion" method="post">
+        <form action="/nueva-publicacion" method="post" enctype="multipart/form-data">
             <div class="imagen-publicacion">
-                <input type="file" name="imagen" id="imagen" required>
+                <input type="file" name="imagen" id="imagen" accept="image/*" required>
             </div>
             <div class="texto-publicacion">
                 <textarea name="texto"></textarea>

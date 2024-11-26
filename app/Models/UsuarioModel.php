@@ -29,23 +29,22 @@ class UsuarioModel extends \Com\TravelMates\Core\BaseDbModel {
         return $stmt->fetch();
     }
 
+    //hay que echarle un ojo a esto
     function obtenerUsuariosCompatibles (int $id_usuario) {
-        $stmt = $this->pdo->prepare('SELECT intereses FROM intereses WHERE id_usuario = ?');
+        $stmt = $this->pdo->prepare('SELECT i.interes FROM intereses i JOIN intereses_usuarios iu ON iu.id_interes = i.id WHERE iu.id_usuario = ?');
         $stmt->execute([$id_usuario]);
-        $result = $stmt->get_result();
 
-        $intereses_usuario = $result->fetch_all(MYSQLI_ASSOC);
+        $intereses_usuario = $stmt->fetchAll();
         $intereses_usuario = array_column($intereses_usuario, 'interes'); // Convertir los intereses en un array simple
 
         $usuarios_compatibles = [];
 
         // Buscar usuarios con intereses similares
         foreach ($intereses_usuario as $interes) {
-            $stmt = $this->pdo->prepare('SELECT id_usuario FROM intereses WHERE interes = ? AND id_usuario != ?');
+            $stmt = $this->pdo->prepare('SELECT iu.id_usuario FROM intereses_usuarios iu JOIN intereses i ON i.id = iu.id_interes WHERE i.interes = ? AND iu.id_usuario != ?');
             $stmt->execute([$interes, $id_usuario]);
-            $result = $stmt->get_result();
 
-            while ($row = $result->fetch_assoc()) {
+            while ($row = $stmt->fetch_assoc()) {
                 $id_usuario_compatible = $row['id_usuario'];
                 if (isset($usuarios_compatibles[$id_usuario_compatible])) {
                     $usuarios_compatibles[$id_usuario_compatible]++;
@@ -54,7 +53,7 @@ class UsuarioModel extends \Com\TravelMates\Core\BaseDbModel {
                 }
             }
         }
-        arsort($usuarios_compatibles)
+        arsort($usuarios_compatibles);
         return $usuarios_compatibles;
     }
 
@@ -116,6 +115,16 @@ class UsuarioModel extends \Com\TravelMates\Core\BaseDbModel {
     function size(): int {
         $stmt = $this->pdo->query('SELECT * FROM usuarios');
         return count($stmt->fetchAll());
+    }
+    
+    function eliminarUsuario(int $id_usuario): bool {
+        $stmt = $this->pdo->prepare('DELETE FROM usuarios WHERE id = ?');
+        $stmt->execute([$id_usuario]);
+        if ($stmt->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //TODO: Actualizar esto para añadir intereses y url_img

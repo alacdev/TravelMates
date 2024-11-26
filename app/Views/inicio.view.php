@@ -7,14 +7,25 @@
     </head>
     <body>
         <section class="publicaciones">
-            <?php foreach ($publicaciones as $publicacion) { ?>
-            <div class="publicacion" id="<?php echo $publicacion['id'] ?>">
-                <img src="<?php echo $publicacion['url_img'] ?>" alt="Publicación de <?php echo $publicacion['id_usuario'] ?> el <?php echo $publicacion['fecha'] ?>"/>
-                <p><?php echo $publicacion['texto'] ?><span><?php echo $publicacion['fecha'] ?></span></p>
-                <div class="acciones">
-                    <a><i class="fa-solid fa-heart"></i></a>
-                    <a><i class="fa-solid fa-comment"></i></a>
-                    <!-- <a><i class="fa-solid fa-share"></i></a> -->
+            <?php 
+            $usuarioModel = new \Com\TravelMates\Models\UsuarioModel();            
+            foreach ($publicaciones as $publicacion) { 
+                $usuario = $usuarioModel->obtenerUsuarioPorUsername($publicacion['username']);
+            ?>
+            <div class="publicacion">
+                <div class="publicacion-header">
+                    <p><img src="<?php echo ($usuario['url_img'] != null) ? $usuario['url_img'] : 'assets/img/defaultUser.png' ?>" class="foto-perfil">@<?php echo $publicacion['username'] ?></p>
+                </div>
+                <div class="publicacion-body">
+                    <img src="<?php echo $publicacion['url_img'] ?>" alt="Publicación de <?php echo $publicacion['username'] ?> el <?php echo $publicacion['fecha'] ?>"/>
+                    <p><?php echo $publicacion['texto'] ?></p>
+                </div>
+                <div class="publicacion-footer">
+                    <span class="acciones">
+                        <a><i class="fa fa-heart"></i></a>
+                        <a><i class="fa fa-comment"></i></a>                    
+                    </span>                    
+                    <span class="fecha"><?php echo $publicacion['fecha'] ?></span>
                 </div>
             </div>
             <?php } ?>

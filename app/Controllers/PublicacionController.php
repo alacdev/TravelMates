@@ -8,16 +8,30 @@ class PublicacionController extends \Com\TravelMates\Core\BaseController {
         $this->view->showViews(array('templates/header.view.php', 'nueva-publicacion.view.php', 'templates/footer.view.php'));
     }
 
-    public function crearNuevaPublicacion(array $post) {  
-        $model = new \Com\TravelMates\Models\PublicacionModel();
-        $post['url_img'];
-        bool result = $model->nuevaPublicacion($post['url_img'], $post['texto'], $post['fecha']);
-        if (result) {
+    public function crearNuevaPublicacion(array $post, array $files) {  
+        $publicacionModel = new \Com\TravelMates\Models\PublicacionModel();
+        $imgurModel = new \Com\TravelMates\Models\ImgurModel();
+
+        $imagen = $files['imagen']['tmp_name'];
+
+        if (!isset($files['imagen']) || $files['imagen']['error'] !== UPLOAD_ERR_OK) {
+            header('location:/nueva-publicacion?error=subida_imagen');
+            exit();
+        }
+
+        $post['url_img'] = $imgurModel->obtenerUrl($imagen);
+
+        // Guardar la nueva publicación
+        $result = $publicacionModel->nuevaPublicacion($post['url_img'], $_SESSION['user']['username'], $post['texto'], date_create('now')->format('Y-m-d H:i:s'));
+
+        // Redirigir en función del resultado
+        if ($result) {
             header('location:/');
         } else {
-            //error al publicar
+            // Error al publicar
             header('location:/nueva-publicacion');
         }        
     }
+
 
 }

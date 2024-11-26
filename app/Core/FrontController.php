@@ -84,7 +84,7 @@ class FrontController {
 
             Route::add('/nueva-publicacion', function () {
                 $controlador = new \Com\TravelMates\Controllers\PublicacionController();
-                $controlador->crearNuevaPublicacion($_POST);
+                $controlador->crearNuevaPublicacion($_POST, $_FILES);
             }, 'post');
 
             Route::add('/logout', function () {

@@ -16,7 +16,7 @@ class ImgurModel extends \Com\TravelMates\Core\BaseDbModel {
      */
     public function obtenerUrl($ruta) {
         if (!file_exists($ruta)) {
-            throw new Exception("El archivo no existe: $ruta");
+            //error: el archivo no existe
         }
 
         $image_data = base64_encode(file_get_contents($ruta));
@@ -40,8 +40,7 @@ class ImgurModel extends \Com\TravelMates\Core\BaseDbModel {
         if (isset($response_data['data']['link'])) {
             return $response_data['data']['link'];
         } else {
-            $error_message = $response_data['data']['error'] ?? 'Error desconocido';
-            throw new Exception("Error al subir la imagen: $error_message");
+            //error
         }
     }
 }

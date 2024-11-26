@@ -7,24 +7,21 @@ namespace Com\TravelMates\Models;
 class PublicacionModel extends \Com\TravelMates\Core\BaseDbModel {
 
     function getAll(): array {
-        $stmt = $this->pdo->query('SELECT * FROM publicaciones');
+        $stmt = $this->pdo->query('SELECT * FROM publicaciones ORDER BY fecha DESC');
         return $stmt->fetchAll();
     }
 
-    public function nuevaPublicacion(string $url, string $texto, string $fecha): bool {
-        $sql = "INSERT INTO publicaciones (url_img, texto, fecha) VALUES (:url_img, :texto, :fecha)";
+    public function nuevaPublicacion(string $url, string $username, string $texto, string $fecha): bool {
+        $sql = "INSERT INTO publicaciones (url_img, username, texto, fecha) VALUES (:url_img, :username, :texto, :fecha)";
         $stmt = $this->pdo->prepare($sql);
 
-        $resultado = $stmt->execute([
+        $stmt->execute([
             ':url_img' => $url,
+            ':username' => $username,
             ':texto' => $texto,
             ':fecha' => $fecha
         ]);
 
-        if (!$resultado) {
-            error_log("Error al insertar la pu: " . implode(", ", $stmt->errorInfo()));
-        }
-        echo json_encode(['status' => $resultado ? 'success' : 'error']);
-        return $resultado;
+        return $stmt->rowCount() > 0;
     }
 }

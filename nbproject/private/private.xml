@@ -3,24 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Controllers/CuentaController.php</file>
-            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Models/PublicacionesModel.php</file>
-            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Core/FrontController.php</file>
-            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Views/cuenta.view.php</file>
-            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Controllers/InicioController.php</file>
-            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Controllers/ChatController.php</file>
-            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Views/chat.view.php</file>
-            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/public/assets/css/chat.css</file>
-            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Views/register.view.php</file>
             <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Views/inicio.view.php</file>
             <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Models/ImgurModel.php</file>
-            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Views/login.view.php</file>
-            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Views/templates/left-menu.view.php</file>
-            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Views/templates/header.view.php</file>
+            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Views/buscar-usuario.view.php</file>
+            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Core/FrontController.php</file>
+            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Controllers/InicioController.php</file>
             <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Models/UsuarioModel.php</file>
-            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Controllers/ImgurController.php.php</file>
-            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Controllers/UsuarioController.php</file>
+            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Controllers/PublicacionController.php</file>
+            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Views/nueva-publicacion.view.php</file>
             <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/public/assets/css/inicio.css</file>
+            <file>file:/C:/Users/hugov/Alen_Acuna_Hugo_53818872E/www/app/Models/PublicacionModel.php</file>
         </group>
     </open-files>
 </project-private>
