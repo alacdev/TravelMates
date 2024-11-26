@@ -4,7 +4,7 @@ namespace Com\TravelMates\Controllers;
 
 class ChatController extends \Com\TravelMates\Core\BaseController {
 
-    public function show() {  
+    public function mostrar() {  
         
         $data = array(
             'titulo' => 'Usuarios',

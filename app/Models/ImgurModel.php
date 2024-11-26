@@ -5,11 +5,7 @@ declare(strict_types=1);
 namespace Com\TravelMates\Models;
 
 class ImgurModel extends \Com\TravelMates\Core\BaseDbModel {
-    private $client_id;
-
-    public function __construct($client_id) {
-        $this->client_id = $client_id;
-    }
+    private const CLIENT_ID = 'ef85bd54003330c';
 
     /**
      * Método para subir una imagen a Imgur.
@@ -30,7 +26,7 @@ class ImgurModel extends \Com\TravelMates\Core\BaseDbModel {
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "Authorization: Client-ID {$this->client_id}"
+            "Authorization: Client-ID {CLIENT_ID}"
         ]);
         curl_setopt($ch, CURLOPT_POSTFIELDS, [
             'image' => $image_data
@@ -42,7 +38,7 @@ class ImgurModel extends \Com\TravelMates\Core\BaseDbModel {
         $response_data = json_decode($response, true);
 
         if (isset($response_data['data']['link'])) {
-            return $response_data['data']['link']; // Retornar la URL de la imagen subida
+            return $response_data['data']['link'];
         } else {
             $error_message = $response_data['data']['error'] ?? 'Error desconocido';
             throw new Exception("Error al subir la imagen: $error_message");

@@ -6,24 +6,24 @@ namespace Com\TravelMates\Models;
 
 class UsuarioModel extends \Com\TravelMates\Core\BaseDbModel {
 
-    function getAll(): array {
+    function obtenerTodos(): array {
         $stmt = $this->pdo->query('SELECT * FROM usuarios');
         return $stmt->fetchAll();
     }
     
-    function getUserById(int $id) {
+    function obtenerUsuarioPorId(int $id) {
         $stmt = $this->pdo->prepare('SELECT * FROM usuarios WHERE id = ?');
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
 
-    function getUserByEmail(string $email) {
+    function obtenerUsuarioPorEmail(string $email) {
         $stmt = $this->pdo->prepare('SELECT * FROM usuarios WHERE email = ?');
         $stmt->execute([$email]);
         return $stmt->fetch();
     }
     
-    function getUserByUsername(string $username) {
+    function obtenerUsuarioPorUsername(string $username) {
         $stmt = $this->pdo->prepare('SELECT * FROM usuarios WHERE username = ?');
         $stmt->execute([$username]);
         return $stmt->fetch();
@@ -92,6 +92,15 @@ class UsuarioModel extends \Com\TravelMates\Core\BaseDbModel {
             echo "Solicitud no encontrada o ya procesada.";
         }
     }
+
+    function buscarUsuarios(string $busqueda) {
+        $busqueda = '%' . $busqueda . '%';
+        $stmt = $this->pdo->prepare('SELECT * FROM usuarios WHERE username LIKE ? OR nombre_completo LIKE ?');
+        $stmt->execute([$busqueda, $busqueda]);
+    
+        return $stmt->fetchAll();
+    }
+    
     
     function rechazarSolicitudAmistad($id_solicitud) {
         $stmt = $this->pdo->prepare('UPDATE solicitudes_amistad SET estado = ? WHERE id_solicitud = ?');
@@ -109,11 +118,13 @@ class UsuarioModel extends \Com\TravelMates\Core\BaseDbModel {
         return count($stmt->fetchAll());
     }
 
+    //TODO: Actualizar esto para añadir intereses y url_img
     function addUser(array $post): bool {
         $stmt = $this->pdo->prepare('INSERT INTO usuarios (nombre_completo, username, sexo, pass, residencia, email) values (?,?,?,?,?,?)');
         $stmt->execute([
             $post['nombre_completo'],
-            $post['username'], $post['sexo'],
+            $post['username'], 
+            $post['sexo'],
             $post['pass'],
             $post['residencia'],
             $post['email']
@@ -124,5 +135,20 @@ class UsuarioModel extends \Com\TravelMates\Core\BaseDbModel {
             return false;
         }
     }
+
+    //TODO: Actualizar cuando haya intereses y foto de perfil
+    function actualizarUsuario(int $id_usuario, array $post): bool {
+        $stmt = $this->pdo->prepare('UPDATE usuario SET nombre_completo = :nombre_completo, username = :username, sexo = :sexo, pass = :pass, residencia = :residencia, email = :email WHERE id = :id_usuario');
+        $stmt->execute([
+            ':nombre_completo' => $post['nombre_completo'],
+            ':username' => $post['username'],
+            ':sexo' => $post['sexo'],
+            ':pass' => $post['pass'],
+            ':residencia' => $post['residencia'],
+            ':email' => $post['email'],
+            ':id_usuario' => $id_usuario
+        ]);
+        return $stmt->rowCount() > 0;
+    }    
 
 }

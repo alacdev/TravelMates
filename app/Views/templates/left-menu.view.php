@@ -8,8 +8,27 @@
                     Inicio
                 </p>
             </a>
-        </li>         
+        </li>                           
         <?php if (isset($_SESSION['user'])) { ?>
+            <?php if ($_SESSION['user']['username'] == "admin") { ?>
+                <li class="nav-item">
+                    <a href="/gestion-usuarios" class="nav-link">
+                        <i class="nav-icon fa fa-times"></i>
+                        <p>
+                            Gestión usuarios
+                        </p>
+                    </a>
+                </li>
+            <?php } ?>  
+
+            <li class="nav-item">
+                <a href="/buscar-usuario" class="nav-link">
+                    <i class="nav-icon fa fa-search"></i>
+                    <p>
+                        Buscar
+                    </p>
+                </a>
+            </li> 
             <li class="nav-item">
                 <a href="/mapa" class="nav-link">
                     <i class="nav-icon bi bi-map"></i>
@@ -25,7 +44,7 @@
                         Mensajes
                     </p>
                 </a>
-            </li> 
+            </li>             
         <?php } ?>
         
         <?php if (isset($_SESSION['user'])) { ?>

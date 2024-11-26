@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Perfil</title>
+    <title>Editar usuario</title>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -12,7 +12,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Mi Perfil</h1>
+                        <h1 class="m-0">Editar <?php echo $usuario['username'] ?></h1>
                     </div>
                 </div>
             </div>
@@ -27,26 +27,26 @@
                             </div>
                             <div class="card-body">
                                 <!-- Formulario para editar el perfil -->
-                                <form action="/actualizar-cuenta" method="POST" enctype="multipart/form-data">
+                                <form action="/editar-usuario/<?php echo $usuario['id']?>" method="POST" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="name">Nombre de usuario</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="<?php echo $_SESSION['user']['username']?>" required>
+                                        <input type="text" class="form-control" id="name" name="name" value="<?php echo $usuario['username']?>" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Nombre</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="<?php echo $_SESSION['user']['nombre_completo']?>" required>
+                                        <input type="text" class="form-control" id="name" name="name" value="<?php echo $usuario['nombre_completo']?>" required>
                                     </div>                                    
                                     <div class="form-group">
                                         <label for="email">Correo Electrónico</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="<?php echo $_SESSION['user']['email']?>" required>
+                                        <input type="email" class="form-control" id="email" name="email" value="<?php echo $usuario['email']?>" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="residencia">Lugar actual de residencia</label>
-                                        <input type="text" class="form-control" id="residencia" name="residencia" value="<?php echo $_SESSION['user']['residencia']?>" required>
+                                        <input type="text" class="form-control" id="residencia" name="residencia" value="<?php echo $usuario['residencia']?>" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="profile_picture">Foto de Perfil</label><br>
-                                        <img src="assets/img/profile/default.jpg" id="profile-image" class="img-thumbnail mb-3" alt="Foto de Perfil" width="150">
+                                        <img src="<?php echo $usuario['url_img']?>" id="profile-image" class="img-thumbnail mb-3" alt="Foto de Perfil" width="150">
                                         <input type="file" class="form-control-file" id="profile_picture" name="profile_picture" accept="image/*">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Guardar Cambios</button>

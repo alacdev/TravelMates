@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Com\TravelMates\Models;
 
-class PublicacionesModel extends \Com\TravelMates\Core\BaseDbModel {
+class PublicacionModel extends \Com\TravelMates\Core\BaseDbModel {
 
     function getAll(): array {
         $stmt = $this->pdo->query('SELECT * FROM publicaciones');
         return $stmt->fetchAll();
     }
 
-    public function addPublicacion(string $url, string $texto, string $fecha): bool {
-        $sql = "INSERT INTO publicaciones (url_img, texto, fecha) VALUES (:url, :texto, :fecha)";
+    public function nuevaPublicacion(string $url, string $texto, string $fecha): bool {
+        $sql = "INSERT INTO publicaciones (url_img, texto, fecha) VALUES (:url_img, :texto, :fecha)";
         $stmt = $this->pdo->prepare($sql);
 
         $resultado = $stmt->execute([

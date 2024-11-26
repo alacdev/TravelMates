@@ -7,19 +7,21 @@
 </head>
 <body>
   <div class="barra-busqueda">
-    <form action="buscarUsuario.php" method="GET"> 
-        <input type="text" name="buscar-usuario" placeholder="Buscar..." required> 
+    <form action="/buscar-usuario" method="POST"> 
+        <input type="text" name="busqueda" placeholder="Buscar..." required> 
         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
   </div>  
   <div class="usuarios">
     <!-- Búsqueda -->
-    <?php foreach ($busquedaUsuarios as $usuario) { ?>
-      <div class="usuario-busqueda">
-        <img src="<?php echo $usuario['url_img'] ?>" alt="Foto de perfil de <?php echo $usuario['username'] ?>" class="avatar">
-        <p><?php echo $usuario['username'] ?></p>
-        <p><?php echo $usuario['nombre_completo'] ?></p>
-      </div>
+    <?php isset ($usuariosBusqueda) { ?>
+      <?php foreach ($usuariosBusqueda as $usuario) { ?>
+        <div class="usuario-busqueda">
+          <img src="<?php echo $usuario['url_img'] ?>" alt="Foto de perfil de <?php echo $usuario['username'] ?>" class="avatar">
+          <p><?php echo $usuario['username'] ?></p>
+          <p><?php echo $usuario['nombre_completo'] ?></p>
+        </div>
+      <?php } ?>
     <?php } ?>
 
     <!-- Usuarios recomendados -->

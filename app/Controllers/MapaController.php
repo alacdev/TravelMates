@@ -4,11 +4,11 @@ namespace Com\TravelMates\Controllers;
 
 class MapaController extends \Com\TravelMates\Core\BaseController {
 
-    public function showMapa() {
+    public function mostrarMapa() {
         $this->view->showViews(['templates/header.view.php', 'mapa.view.php', 'templates/footer.view.php']);
     }
 
-    public function getMarcadores() {
+    public function obtenerMarcadores() {
         if (isset($_SESSION['user'])) {
             $id_usuario = $_SESSION['user']['id'];
             $model = new \Com\TravelMates\Models\MapaModel();
@@ -20,7 +20,7 @@ class MapaController extends \Com\TravelMates\Core\BaseController {
         }
     }
 
-    public function addMarcador() {
+    public function nuevoMarcador() {
         if (isset($_SESSION['user'], $_POST['latitud'], $_POST['longitud'], $_POST['mensaje'])) {
             $id_usuario = $_SESSION['user']['id'];
             $latitud = $_POST['latitud'];
@@ -30,7 +30,7 @@ class MapaController extends \Com\TravelMates\Core\BaseController {
             error_log("Datos recibidos - Usuario: $id_usuario, Latitud: $latitud, Longitud: $longitud, Mensaje: $mensaje");
 
             $model = new \Com\TravelMates\Models\MapaModel();
-            $resultado = $model->addMarcador($id_usuario, $latitud, $longitud, $mensaje);
+            $resultado = $model->nuevoMarcador($id_usuario, $latitud, $longitud, $mensaje);
 
             echo json_encode(['status' => $resultado ? 'success' : 'error']);
         } else {

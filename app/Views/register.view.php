@@ -55,7 +55,6 @@
                         </div>
                         <?php if (isset($_SESSION['errores_register']['email'])) { ?>
                             <p class="login-box-msg text-danger"><?php echo isset($_SESSION['errores_register']['email']) ? $_SESSION['errores_register']['email'] : '' ?></p>
-
                         <?php } ?>
                         <div class="input-group mb-3">
                             <input type="password" name="pass" class="form-control" placeholder="Contraseña" required>
@@ -67,7 +66,6 @@
                         </div>
                         <?php if (isset($_SESSION['errores_register']['pass'])) { ?>
                             <p class="login-box-msg text-danger"><?php echo isset($_SESSION['errores_register']['pass']) ? $_SESSION['errores_register']['pass'] : '' ?></p>
-
                         <?php } ?>
 
                         <div class="input-group mb-3">
@@ -96,6 +94,27 @@
                             <p class="login-box-msg text-danger"><?php echo isset($_SESSION['errores_register']['residencia']) ? $_SESSION['errores_register']['residencia'] : '' ?></p>
                         <?php } ?>
                         <div class="input-group mb-3">
+                            <select name="intereses[]" class="form-control" multiple>
+                                <option value="animales">Animales</option>
+                                <option value="playa">Playa</option>
+                                <option value="montana">Montaña</option>
+                                <option value="deporte">Deporte</option>
+                                <option value="musica">Música</option>
+                                <option value="cultura">Cultura</option>
+                                <option value="historia">Historia</option>                                
+                            </select>
+                            <label for="interes_personalizado">Otro:</label>
+                            <input type="text" id="interes_personalizado" name="interes_personalizado">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-check"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <?php if (isset($_SESSION['errores_register']['sexo'])) { ?>
+                            <p class="login-box-msg text-danger"><?php echo isset($_SESSION['errores_register']['sexo']) ? $_SESSION['errores_register']['sexo'] : '' ?></p>
+                        <?php } ?>
+                        <div class="input-group mb-3">
                             <select name="sexo" class="form-control" required>
                                 <option value="hombre" <?php echo (isset($_POST['sexo']) && $_POST['sexo'] == "hombre") ? "selected" : ""; ?>>Hombre</option>
                                 <option value="mujer" <?php echo (isset($_POST['sexo']) && $_POST['sexo'] == "mujer") ? "selected" : ""; ?>>Mujer</option>
@@ -109,6 +128,12 @@
                         </div>
                         <?php if (isset($_SESSION['errores_register']['sexo'])) { ?>
                             <p class="login-box-msg text-danger"><?php echo isset($_SESSION['errores_register']['sexo']) ? $_SESSION['errores_register']['sexo'] : '' ?></p>
+                        <?php } ?>
+                        <div class="input-group mb-3">
+                            <input type="file" name="foto_perfil" class="form-control">
+                        </div>
+                        <?php if (isset($_SESSION['errores_register']['foto_perfil'])) { ?>
+                            <p class="login-box-msg text-danger"><?php echo isset($_SESSION['errores_register']['foto_perfil']) ? $_SESSION['errores_register']['foto_perfil'] : '' ?></p>
                         <?php } ?>
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center">

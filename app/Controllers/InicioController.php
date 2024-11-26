@@ -6,9 +6,10 @@ use Com\TravelMates\Models\PublicacionesModel;
 
 class InicioController extends \Com\TravelMates\Core\BaseController {
 
-    public function index() {
+    public function inicio() {
         $model = new PublicacionesModel();
         $publicaciones = $model->getAll();
+        //TODO: Hacer que solo se busquen las de la gente que sigue ese usuario.
 
         $data = array(
             'titulo' => 'Página de inicio',
@@ -19,15 +20,15 @@ class InicioController extends \Com\TravelMates\Core\BaseController {
         $this->view->showViews(array('templates/header.view.php', 'inicio.view.php', 'templates/footer.view.php'), $data);
     }
 
-    public function showLogin() {
+    public function mostrarLogin() {
         $this->view->show('login.view.php');
     }
 
-    public function showRegister() {
+    public function mostrarRegistro() {
         $this->view->show('register.view.php');
     }
 
-    public function processLogin(array $post) {
+    public function iniciarSesion(array $post) {
         $userModel = new \Com\TravelMates\Models\UsuarioModel();
         $user = $userModel->getUserByUsername($post['username']);
         if ($user != null) {
@@ -44,16 +45,32 @@ class InicioController extends \Com\TravelMates\Core\BaseController {
         }
     }
 
-    public function processRegister(array $post) {
+    public function registrar(array $post) {
         $errores = $this->checkRegisterForm($post);
         if (count($errores) > 0) {
             $_SESSION['errores_register'] = $errores;
             header('location:/register');
         } else {
+            //Hashear contraseña
             $hashpass = password_hash($post['pass'], PASSWORD_DEFAULT);
             unset($post['pass']);
             unset($post['confirm_pass']);
             $post ['pass'] = $hashpass;
+
+            //Tratar los intereses del usuario
+            $intereses = $post['intereses'];
+            $interes_personalizado = $post['interes_personalizado'];
+            unset ($post['interes_personalizado']);
+            if (!empty($interes_personalizado)) {
+                $intereses[] = $interes_personalizado;
+            }
+
+            //Pasar la foto a una url
+            $FotoPerfil = $post['foto_perfil'];
+            unset($post['foto_perfil']);
+            $imgurModel = new \Com\TravelMates\Models\ImgurModel();
+            $post['img_url'] = $model->obtenerUrl($FotoPerfil);
+
             $userModel = new \Com\TravelMates\Models\UsuarioModel();
             if ($userModel->addUser($post)) {
                 $user = $userModel->getUserByEmail($post['email']);
@@ -65,6 +82,7 @@ class InicioController extends \Com\TravelMates\Core\BaseController {
             }
         }
     }
+
 
     private function checkRegisterForm(array $post): array {
         $userModel = new \Com\TravelMates\Models\UsuarioModel();
