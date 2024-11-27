@@ -32,9 +32,8 @@ class FrontController {
                 Route::add('/editar-usuario/([0-9]+)', function ($id_usuario) {
                     $controlador = new \Com\TravelMates\Controllers\UsuarioController();
                     $controlador->editarUsuario($id_usuario);
-                }, 'post');   
-                
-                //TODO: Hacer funciones para eliminar o lo que sea.                
+                }, 'post');                   
+                          
             }
 
             Route::add('/cuenta', function () {
@@ -44,7 +43,7 @@ class FrontController {
 
             Route::add('/actualizar-cuenta', function () {
                 $controlador = new \Com\TravelMates\Controllers\CuentaController();
-                $controlador->actualizarCuenta($_POST);
+                $controlador->actualizarCuenta($_POST, isset($_FILES) && !empty($_FILES) ? $_FILES : []);
             }, 'post');
 
             Route::add('/buscar-usuario', function () {

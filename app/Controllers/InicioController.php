@@ -69,11 +69,11 @@ class InicioController extends \Com\TravelMates\Core\BaseController {
             $FotoPerfil = $post['foto_perfil'];
             unset($post['foto_perfil']);
             $imgurModel = new \Com\TravelMates\Models\ImgurModel();
-            $post['img_url'] = $model->obtenerUrl($FotoPerfil);
+            $post['img_url'] = $imgurModel->obtenerUrl($FotoPerfil);
 
             $userModel = new \Com\TravelMates\Models\UsuarioModel();
             if ($userModel->addUser($post)) {
-                $user = $userModel->obtenerUsuarioPorEmaile($post['email']);
+                $user = $userModel->obtenerUsuarioPorEmail($post['email']);
                 $_SESSION['user'] = $user;
                 header('location:/');
             } else {

@@ -2,7 +2,7 @@
 <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="/" class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/') ? 'active' : ''; ?>">
                 <i class="nav-icon fa fa-home"></i>
                 <p>
                     Inicio
@@ -12,7 +12,7 @@
         <?php if (isset($_SESSION['user'])) { ?>
             <?php if ($_SESSION['user']['username'] == "admin") { ?>
                 <li class="nav-item">
-                    <a href="/gestion-usuarios" class="nav-link">
+                    <a href="/gestion-usuarios" class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/gestion-usuarios') ? 'active' : ''; ?>">
                         <i class="nav-icon fa fa-user-cog"></i>
                         <p>
                             Gestión usuarios
@@ -22,7 +22,7 @@
             <?php } ?>  
 
             <li class="nav-item">
-                <a href="/buscar-usuario" class="nav-link">
+                <a href="/buscar-usuario" class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/buscar-usuario') ? 'active' : ''; ?>">
                     <i class="nav-icon fa fa-search"></i>
                     <p>
                         Buscar
@@ -30,7 +30,7 @@
                 </a>
             </li> 
             <li class="nav-item">
-                <a href="/mapa" class="nav-link">
+                <a href="/mapa" class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/mapa') ? 'active' : ''; ?>">
                     <i class="nav-icon fa fa-map"></i>
                     <p>
                         Mapa
@@ -38,7 +38,7 @@
                 </a>
             </li>    
             <li class="nav-item">
-                <a href="/chat" class="nav-link">
+                <a href="/chat" class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/chat') ? 'active' : ''; ?>">
                     <i class="nav-icon fa fa-comment-dots"></i>
                     <p>
                         Mensajes

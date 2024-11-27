@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container mt-4">
-    <table class="table table-hover">
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>Nombre de usuario</th>

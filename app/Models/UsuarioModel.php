@@ -147,6 +147,8 @@ class UsuarioModel extends \Com\TravelMates\Core\BaseDbModel {
 
     //TODO: Actualizar cuando haya intereses y foto de perfil
     function actualizarUsuario(int $id_usuario, array $post): bool {
+        var_dump($post);
+        die();
         $stmt = $this->pdo->prepare('UPDATE usuario SET nombre_completo = :nombre_completo, username = :username, sexo = :sexo, pass = :pass, residencia = :residencia, email = :email WHERE id = :id_usuario');
         $stmt->execute([
             ':nombre_completo' => $post['nombre_completo'],
