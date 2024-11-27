@@ -2,6 +2,8 @@
 
 namespace Com\TravelMates\Controllers;
 
+use Com\TravelMates\Models\InteresesModel;
+
 class UsuarioController extends \Com\TravelMates\Core\BaseController {
 
     public function mostrar() {  
@@ -55,6 +57,9 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController {
         $result = $usermodel->eliminarUsuario($id_usuario); 
         if (!$result) {
             //error
+        } else {
+            $interesesModel = new InteresesModel();
+            $interesesModel->eliminarInteresesUsuario($id_usuario);
         }
         header("location:/gestion-usuarios");
     }

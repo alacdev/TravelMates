@@ -8,7 +8,7 @@
     <body>
         <form action="/nueva-publicacion" method="post" enctype="multipart/form-data">
             <div class="imagen-publicacion">
-                <input type="file" name="imagen" id="imagen" accept="image/*" required>
+                <input type="file" name="imagen" id="imagen" accept="image/png, image/jpeg" required>
             </div>
             <div class="texto-publicacion">
                 <textarea name="texto"></textarea>

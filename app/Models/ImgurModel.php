@@ -12,14 +12,10 @@ class ImgurModel extends \Com\TravelMates\Core\BaseDbModel {
      *
      * @param string $ruta Ruta del archivo que se subirá.
      * @return string URL de la imagen subida.
-     * @throws Exception Si ocurre un error al subir la imagen.
      */
-    public function obtenerUrl($ruta) {
-        if (!file_exists($ruta)) {
-            //error: el archivo no existe
-        }
-
+    public function obtenerUrl($ruta) {        
         $image_data = base64_encode(file_get_contents($ruta));
+        
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'https://api.imgur.com/3/image');
@@ -30,10 +26,10 @@ class ImgurModel extends \Com\TravelMates\Core\BaseDbModel {
         ]);
         curl_setopt($ch, CURLOPT_POSTFIELDS, [
             'image' => $image_data
-        ]);
+        ]);        
 
         $response = curl_exec($ch);
-        curl_close($ch);
+        curl_close($ch);        
 
         $response_data = json_decode($response, true);
 

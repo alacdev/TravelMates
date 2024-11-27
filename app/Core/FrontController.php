@@ -4,12 +4,14 @@ namespace Com\TravelMates\Core;
 
 use Steampixel\Route;
 
-class FrontController {
+class FrontController
+{
 
-    static function main() {
+    static function main()
+    {
 
-        session_start();       
-        
+        session_start();
+
 
         if (isset($_SESSION['user'])) {
 
@@ -17,24 +19,33 @@ class FrontController {
                 Route::add('/gestion-usuarios', function () {
                     $controlador = new \Com\TravelMates\Controllers\UsuarioController();
                     $controlador->mostrarGestionUsuarios();
-                }, 'get'); 
+                }, 'get');
 
                 Route::add('/eliminar-usuario/([0-9]+)', function ($id_usuario) {
                     $controlador = new \Com\TravelMates\Controllers\UsuarioController();
                     $controlador->eliminarUsuario($id_usuario);
-                }, 'post');     
-                
+                }, 'post');
+
                 Route::add('/editar-usuario/([0-9]+)', function ($id_usuario) {
                     $controlador = new \Com\TravelMates\Controllers\UsuarioController();
                     $controlador->mostrarEditarUsuario($id_usuario);
-                }, 'get');   
+                }, 'get');
 
                 Route::add('/editar-usuario/([0-9]+)', function ($id_usuario) {
                     $controlador = new \Com\TravelMates\Controllers\UsuarioController();
                     $controlador->editarUsuario($id_usuario);
-                }, 'post');                   
-                          
+                }, 'post');
+
             }
+
+
+
+            Route::add('/', function () {
+                $controlador = new \Com\TravelMates\Controllers\InicioController();
+                $controlador->inicio();
+            }, 'get');
+
+
 
             Route::add('/cuenta', function () {
                 $controlador = new \Com\TravelMates\Controllers\CuentaController();
@@ -49,12 +60,12 @@ class FrontController {
             Route::add('/buscar-usuario', function () {
                 $controlador = new \Com\TravelMates\Controllers\UsuarioController();
                 $controlador->mostrarBuscarUsuarios();
-            }, 'get'); 
+            }, 'get');
 
             Route::add('/buscar-usuario', function () {
                 $controlador = new \Com\TravelMates\Controllers\UsuarioController();
                 $controlador->buscarUsuarios($_POST);
-            }, 'post'); 
+            }, 'post');
 
             Route::add('/mapa', function () {
                 $controlador = new \Com\TravelMates\Controllers\MapaController();
@@ -70,7 +81,7 @@ class FrontController {
                 $controlador = new \Com\TravelMates\Controllers\MapaController();
                 $controlador->nuevoMarcador();
             }, 'post');
-            
+
             Route::add('/chat', function () {
                 $controlador = new \Com\TravelMates\Controllers\ChatController();
                 $controlador->mostrar();
@@ -90,6 +101,10 @@ class FrontController {
                 $controlador = new \Com\TravelMates\Controllers\InicioController();
                 $controlador->logout();
             }, 'get');
+
+            Route::pathNotFound(function () {
+                header('location:/');
+            });
         }
 
         Route::add('/login', function () {
@@ -112,13 +127,8 @@ class FrontController {
             $controlador->registrar($_POST);
         }, 'post');
 
-        Route::add('/', function () {
-            $controlador = new \Com\TravelMates\Controllers\InicioController();
-            $controlador->inicio();
-        }, 'get');
-
         Route::pathNotFound(function () {
-            header('location:/');
+            header('location:/login');
         });
 
         Route::methodNotAllowed(function () {

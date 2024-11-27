@@ -44,7 +44,7 @@ class UsuarioModel extends \Com\TravelMates\Core\BaseDbModel {
             $stmt = $this->pdo->prepare('SELECT iu.id_usuario FROM intereses_usuarios iu JOIN intereses i ON i.id = iu.id_interes WHERE i.interes = ? AND iu.id_usuario != ?');
             $stmt->execute([$interes, $id_usuario]);
 
-            while ($row = $stmt->fetch_assoc()) {
+            while ($row = $stmt->fetch()) {
                 $id_usuario_compatible = $row['id_usuario'];
                 if (isset($usuarios_compatibles[$id_usuario_compatible])) {
                     $usuarios_compatibles[$id_usuario_compatible]++;
@@ -127,7 +127,6 @@ class UsuarioModel extends \Com\TravelMates\Core\BaseDbModel {
         }
     }
 
-    //TODO: Actualizar esto para añadir intereses y url_img
     function addUser(array $post): bool {
         $stmt = $this->pdo->prepare('INSERT INTO usuarios (nombre_completo, username, sexo, pass, residencia, email) values (?,?,?,?,?,?)');
         $stmt->execute([
@@ -147,14 +146,10 @@ class UsuarioModel extends \Com\TravelMates\Core\BaseDbModel {
 
     //TODO: Actualizar cuando haya intereses y foto de perfil
     function actualizarUsuario(int $id_usuario, array $post): bool {
-        var_dump($post);
-        die();
-        $stmt = $this->pdo->prepare('UPDATE usuario SET nombre_completo = :nombre_completo, username = :username, sexo = :sexo, pass = :pass, residencia = :residencia, email = :email WHERE id = :id_usuario');
+        $stmt = $this->pdo->prepare('UPDATE usuarios SET nombre_completo = :nombre_completo, username = :username, residencia = :residencia, email = :email WHERE id = :id_usuario');
         $stmt->execute([
             ':nombre_completo' => $post['nombre_completo'],
             ':username' => $post['username'],
-            ':sexo' => $post['sexo'],
-            ':pass' => $post['pass'],
             ':residencia' => $post['residencia'],
             ':email' => $post['email'],
             ':id_usuario' => $id_usuario

@@ -18,7 +18,7 @@
                         class="foto-perfil img-thumbnail" id="foto-preview" alt="Foto de perfil de @<?php echo $_SESSION['user']['username']?>">
 
                     <label for="foto-perfil" class="btn btn-link">Cambiar foto de perfil</label>
-                    <input type="file" id="foto-perfil" name="url_img" accept="image/*" style="display: none;">
+                    <input type="file" id="foto-perfil" name="url_img" accept="image/png, image/jpeg" style="display: none;">
                 </div>
                 <div class="form-group">
                     <label for="username">Nombre de usuario</label>
