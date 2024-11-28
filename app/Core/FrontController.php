@@ -33,19 +33,15 @@ class FrontController
 
                 Route::add('/editar-usuario/([0-9]+)', function ($id_usuario) {
                     $controlador = new \Com\TravelMates\Controllers\UsuarioController();
-                    $controlador->editarUsuario($id_usuario);
+                    $controlador->editarUsuario($id_usuario,$_POST, isset($_FILES) && !empty($_FILES) ? $_FILES : []);
                 }, 'post');
 
             }
-
-
 
             Route::add('/', function () {
                 $controlador = new \Com\TravelMates\Controllers\InicioController();
                 $controlador->inicio();
             }, 'get');
-
-
 
             Route::add('/cuenta', function () {
                 $controlador = new \Com\TravelMates\Controllers\CuentaController();
@@ -66,6 +62,16 @@ class FrontController
                 $controlador = new \Com\TravelMates\Controllers\UsuarioController();
                 $controlador->buscarUsuarios($_POST);
             }, 'post');
+
+            Route::add('/enviar-solicitud/([0-9]+)', function ($id_receptor) {
+                $controlador = new \Com\TravelMates\Controllers\UsuarioController();
+                $controlador->enviarSolicitudAmistad($id_receptor);
+            }, 'get');
+
+            Route::add('/cancelar-solicitud/([0-9]+)', function ($id_receptor) {
+                $controlador = new \Com\TravelMates\Controllers\UsuarioController();
+                $controlador->cancelarSolicitudAmistad($id_receptor);
+            }, 'get');
 
             Route::add('/mapa', function () {
                 $controlador = new \Com\TravelMates\Controllers\MapaController();

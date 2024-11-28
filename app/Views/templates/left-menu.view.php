@@ -12,7 +12,7 @@
         <?php if (isset($_SESSION['user'])) { ?>
             <?php if ($_SESSION['user']['username'] == "admin") { ?>
                 <li class="nav-item">
-                    <a href="/gestion-usuarios" class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/gestion-usuarios') ? 'active' : ''; ?>">
+                    <a href="/gestion-usuarios" class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/gestion-usuarios' || strpos($_SERVER['REQUEST_URI'], '/editar-usuario/') === 0) ? 'active' : ''; ?>">
                         <i class="nav-icon fa fa-user-cog"></i>
                         <p>
                             Gestión usuarios

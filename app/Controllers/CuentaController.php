@@ -11,8 +11,7 @@ class CuentaController extends \Com\TravelMates\Core\BaseController
             'titulo' => 'Cuenta',
             'breadcrumb' => ['Cuenta'],
             'usuario' => $_SESSION['user']
-        );
-
+        );        
         $this->view->showViews(array('templates/header.view.php', 'cuenta.view.php', 'templates/footer.view.php'), $data);
     }
 
@@ -29,7 +28,10 @@ class CuentaController extends \Com\TravelMates\Core\BaseController
             header('location:/cuenta');
         } else {
             $usermodel = new \Com\TravelMates\Models\UsuarioModel();
-            $usermodel->actualizarUsuario($_SESSION['user']['id'], $post);
+            $result = $usermodel->actualizarUsuario($_SESSION['user']['id'], $post);
+            if ($result) {
+                $_SESSION['user'] = $usermodel->obtenerUsuarioPorId($_SESSION['user']['id']);
+            }
             $this->mostrar();
         }
 

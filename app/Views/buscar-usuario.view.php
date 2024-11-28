@@ -44,8 +44,14 @@
                     <p class="mb-0 text-muted"><?php echo $usuario['nombre_completo']; ?></p>
                   </td>
                   <td class="text-end">
-                    <button class="btn btn-primary btn-sm">Enviar solicitud</button>
-                  </td>
+                  <?php if ($usuario['solicitud_enviada']) { ?>
+                    <a href="/cancelar-solicitud/<?php echo $usuario['id']; ?>"><button class="btn btn-success btn-sm"><i class="fa fa-time"></i> Pendiente</button></a>
+                  <?php } else { ?>
+                    <a href="/enviar-solicitud/<?php echo $usuario['id']; ?>" class="btn btn-primary btn-sm">
+                        <i class="fa fa-paper-plane"></i> Enviar solicitud
+                    </a>
+                  <?php } ?>
+                </td>
                 </tr>
               <?php } ?>
             <?php } ?>
@@ -55,29 +61,37 @@
     <?php } ?>
 
 
-    <!-- Usuarios recomendados -->
-    <div class="table-responsive">
-      <table class="table align-middle mb-4">
-        <tbody>
-          <?php foreach ($usuariosRecomendados as $usuario) { ?>
-            <tr class="usuario-recomendado">
-              <td class="text-center">
-                <img
-                  src="<?php echo ($_SESSION['user']['url_img'] != null) ? $_SESSION['user']['url_img'] : 'assets/img/defaultUser.png'; ?>"
-                  alt="Foto de perfil de @<?php echo $usuario['username'] ?>" class="avatar rounded-circle">
-              </td>
-              <td>
-                <p class="mb-0 fw-bold"><?php echo $usuario['username'] ?></p>
-                <p class="mb-0 text-muted"><?php echo $usuario['nombre_completo'] ?></p>
-              </td>
-              <td class="text-end">
-                <button class="btn btn-primary btn-sm">Enviar solicitud</button>
-              </td>
-            </tr>
-          <?php } ?>
-        </tbody>
-      </table>
-    </div>
+    <?php if (!empty($usuariosRecomendados)) { ?>
+      <!-- Usuarios recomendados -->
+      <div class="table-responsive">
+        <table class="table align-middle mb-4">
+          <tbody>
+            <?php foreach ($usuariosRecomendados as $usuario) { ?>
+              <tr class="usuario-recomendado">
+                <td class="text-center">
+                  <img
+                    src="<?php echo ($_SESSION['user']['url_img'] != null) ? $_SESSION['user']['url_img'] : 'assets/img/defaultUser.png'; ?>"
+                    alt="Foto de perfil de @<?php echo $usuario['username'] ?>" class="avatar rounded-circle">
+                </td>
+                <td>
+                  <p class="mb-0 fw-bold"><?php echo $usuario['username'] ?></p>
+                  <p class="mb-0 text-muted"><?php echo $usuario['nombre_completo'] ?></p>
+                </td>
+                <td class="text-end">
+                  <?php if ($usuario['solicitud_enviada']) { ?>
+                    <a href="/cancelar-solicitud/<?php echo $usuario['id']; ?>"><button class="btn btn-success btn-sm"><i class="fa fa-time"></i> Pendiente</button></a>
+                  <?php } else { ?>
+                    <a href="/enviar-solicitud/<?php echo $usuario['id']; ?>" class="btn btn-primary btn-sm">
+                        Enviar solicitud
+                    </a>
+                  <?php } ?>
+                </td>
+              </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+      </div>
+    <?php } ?>
   </div>
 </body>
 

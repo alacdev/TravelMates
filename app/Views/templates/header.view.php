@@ -32,18 +32,19 @@
     <!-- Select 2 -->
     <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/css/general.css">
     </link>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed <?php echo isset($_COOKIE['dark']) ? 'dark-mode' : ''; ?>">
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="bi bi-list-nested"></i></a>
+                            class="fa fa-bars"></i></a>
                 </li>
             </ul>
 
@@ -54,17 +55,17 @@
                     <?php
                     echo isset($_COOKIE['dark']) ?
                         '<a class="nav-link" href="/light" role="button">
-          <i class="bi bi-sun-fill"></i>
+          <i class="fa fa-sun"></i>
         </a>      
       </li>' :
                         '   <a class="nav-link" href="/dark" role="button">
-          <i class="bi bi-moon-fill"></i>
+          <i class="fa fa-moon"></i>
         </a>      
       </li>';
                     ?>
                 <li class="nav-item">
                     <a class="nav-link" href="#" role="button">
-                        <i class="bi bi-bell-fill"></i>
+                        <i class="fa fa-bell"></i>
                     </a>
                 </li>
             </ul>
@@ -84,7 +85,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="<?php echo isset($_SESSION['user']['foto']) ? $_SESSION['user']['foto'] : 'assets/img/defaultUser.png' ?> "
+                        <img src="<?php echo ($_SESSION['user']['url_img'] != null) ? $_SESSION['user']['url_img'] : 'assets/img/defaultUser.png'; ?>"
                             class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">

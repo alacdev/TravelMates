@@ -20,10 +20,6 @@
 
 <body id="register" class="hold-transition register-page">
     <div class="register-box">
-        <div class="register-logo">
-            <a href="#"><b>Travel</b>Mates</a>
-        </div>
-        <!-- /.register-logo -->
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">¿Quieres formar parte de esta gran familia?</p>
@@ -37,13 +33,11 @@
                                 <span class="fas fa-at"></span>
                             </div>
                         </div>
-                    </div>
-                    <?php if (isset($_SESSION['errores_register']['username'])) { ?>
-                        <p class="login-box-msg text-danger">
-                            <?php echo isset($_SESSION['errores_register']['username']) ? $_SESSION['errores_register']['username'] : '' ?>
-                        </p>
-                    <?php } ?>
-                    <div class="input-group mb-3">
+                        <?php if (isset($_SESSION['errores_register']['username'])) { ?>
+                            <p class="login-box-msg text-danger">
+                                <?php echo isset($_SESSION['errores_register']['username']) ? $_SESSION['errores_register']['username'] : '' ?>
+                            </p>
+                        <?php } ?>
                         <input type="text" name="nombre_completo" class="form-control" placeholder="Nombre completo"
                             value="<?php echo isset($_POST['nombre_completo']) ? $_POST['nombre_completo'] : '' ?>"
                             required>
@@ -52,12 +46,13 @@
                                 <span class="fas fa-n"></span>
                             </div>
                         </div>
+                        <?php if (isset($_SESSION['errores_register']['nombre_completo'])) { ?>
+                            <p class="login-box-msg text-danger">
+                                <?php echo isset($_SESSION['errores_register']['nombre_completo']) ? $_SESSION['errores_register']['nombre_completo'] : '' ?>
+                            </p>
+                        <?php } ?>
                     </div>
-                    <?php if (isset($_SESSION['errores_register']['nombre_completo'])) { ?>
-                        <p class="login-box-msg text-danger">
-                            <?php echo isset($_SESSION['errores_register']['nombre_completo']) ? $_SESSION['errores_register']['nombre_completo'] : '' ?>
-                        </p>
-                    <?php } ?>
+
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Correo@dominio.com"
                             value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>" required>
@@ -79,14 +74,13 @@
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
-                    </div>
-                    <?php if (isset($_SESSION['errores_register']['pass'])) { ?>
-                        <p class="login-box-msg text-danger">
-                            <?php echo isset($_SESSION['errores_register']['pass']) ? $_SESSION['errores_register']['pass'] : '' ?>
-                        </p>
-                    <?php } ?>
 
-                    <div class="input-group mb-3">
+                        <?php if (isset($_SESSION['errores_register']['pass'])) { ?>
+                            <p class="login-box-msg text-danger">
+                                <?php echo isset($_SESSION['errores_register']['pass']) ? $_SESSION['errores_register']['pass'] : '' ?>
+                            </p>
+                        <?php } ?>
+
                         <input type="password" name="confirm_pass" class="form-control"
                             placeholder="Confirmar contraseña" required>
                         <div class="input-group-append">
@@ -94,12 +88,13 @@
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
+                        <?php if (isset($_SESSION['errores_register']['confirm_pass'])) { ?>
+                            <p class="login-box-msg text-danger">
+                                <?php echo isset($_SESSION['errores_register']['confirm_pass']) ? $_SESSION['errores_register']['confirm_pass'] : '' ?>
+                            </p>
+                        <?php } ?>
                     </div>
-                    <?php if (isset($_SESSION['errores_register']['confirm_pass'])) { ?>
-                        <p class="login-box-msg text-danger">
-                            <?php echo isset($_SESSION['errores_register']['confirm_pass']) ? $_SESSION['errores_register']['confirm_pass'] : '' ?>
-                        </p>
-                    <?php } ?>
+
                     <div class="input-group mb-3">
                         <input type="text" name="residencia" id="residencia" class="form-control"
                             placeholder="Lugar actual de residencia"
