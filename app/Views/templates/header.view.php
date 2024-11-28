@@ -43,8 +43,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fa fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fa fa-bars"></i></a>
                 </li>
             </ul>
 
@@ -84,9 +83,10 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
+                    <div class="image" style="width: 15%; aspect-ratio: 1 / 1;">
                         <img src="<?php echo ($_SESSION['user']['url_img'] != null) ? $_SESSION['user']['url_img'] : 'assets/img/defaultUser.png'; ?>"
-                            class="img-circle elevation-2" alt="User Image">
+                            style="width: 100%; height: 100%; object-fit: cover;" class="img-circle elevation-2"
+                            alt="User Image">
                     </div>
                     <div class="info">
                         <?php if (isset($_SESSION['user']['username']) && !empty($_SESSION['user']['username'])): ?>
@@ -97,7 +97,6 @@
                             <a href="/login">Iniciar sesión</a>
                         <?php endif; ?>
                     </div>
-
                 </div>
 
                 <?php

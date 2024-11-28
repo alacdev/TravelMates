@@ -14,11 +14,6 @@ class PublicacionController extends \Com\TravelMates\Core\BaseController {
 
         $imagen = $files['imagen']['tmp_name'];
 
-        if (!isset($files['imagen']) || $files['imagen']['error'] !== UPLOAD_ERR_OK) {
-            header('location:/nueva-publicacion?error=subida_imagen');
-            exit();
-        }
-
         $post['url_img'] = $imgurModel->obtenerUrl($imagen);
 
         // Guardar la nueva publicación
