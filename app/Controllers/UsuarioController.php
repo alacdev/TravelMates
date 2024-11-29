@@ -6,17 +6,16 @@ use Com\TravelMates\Models\InteresesModel;
 
 class UsuarioController extends \Com\TravelMates\Core\BaseController
 {
-
-    public function mostrar()
+    public function mostrarUsuario(int $idUsuario)
     {
         $usermodel = new \Com\TravelMates\Models\UsuarioModel();
         $data = array(
             'titulo' => 'Usuarios',
             'breadcrumb' => ['Gestión de usuarios'],
-            'usuarios' => $usermodel->obtenerTodos()
+            'usuario' => $usermodel->obtenerUsuarioPorId($idUsuario)
         );
 
-        $this->view->showViews(array('templates/header.view.php', 'usuarios.view.php', 'templates/footer.view.php'), $data);
+        $this->view->showViews(array('templates/header.view.php', 'usuario.view.php', 'templates/footer.view.php'), $data);
     }
 
     public function mostrarGestionUsuarios()
@@ -43,28 +42,31 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
 
     public function buscarUsuarios(array $post)
     {
-        $usermodel = new \Com\TravelMates\Models\UsuarioModel();
+        $userModel = new \Com\TravelMates\Models\UsuarioModel();
+        $amistadesModel = new \Com\TravelMates\Models\AmistadesModel();
         $busqueda = $post['busqueda'];
-        $usuariosBusqueda = $usermodel->buscarUsuarios($busqueda);
+        $usuariosBusqueda = $userModel->buscarUsuarios($_SESSION['user']['id'], $busqueda);
         foreach ($usuariosBusqueda as &$usuario) {
-            $usuario['solicitud_enviada'] = $usermodel->verificarSolicitud($_SESSION['user']['id'], $usuario['id']);
+            $usuario['solicitud_enviada'] = $amistadesModel->verificarSolicitud($_SESSION['user']['id'], $usuario['id']);
         }
 
         $data = array(
             'titulo' => 'Usuarios',
             'breadcrumb' => ['Gestión de usuarios'],
-            'usuariosRecomendados' => $usermodel->obtenerUsuariosCompatibles($_SESSION['user']['id']),
+            'usuariosRecomendados' => $userModel->obtenerUsuariosCompatibles($_SESSION['user']['id']),
             'usuariosBusqueda' => $usuariosBusqueda
         );
-        // var_dump( $data );die();
+        
         $this->view->showViews(array('templates/header.view.php', 'buscar-usuario.view.php', 'templates/footer.view.php'), $data);
     }
 
-    public function enviarSolicitudAmistad(int $id_receptor)
+    public function enviarSolicitudAmistad(string $busqueda, int $id_receptor)
     {
-        $usermodel = new \Com\TravelMates\Models\UsuarioModel();
-        $result = $usermodel->enviarSolicitudAmistad($_SESSION['user']['id'], $id_receptor);
+        $model = new \Com\TravelMates\Models\AmistadesModel();
+
+        $result = $model->enviarSolicitudAmistad($_SESSION['user']['id'], $id_receptor);
         if ($result) {
+            header('location:/buscar-usuario/'.$busqueda);
             //TODO: Ver como hacer que no se pierda la búsqueda al redirigir de nuevo
         } else {
 
@@ -72,12 +74,13 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
 
     }
 
-    public function cancelarSolicitudAmistad(int $id_receptor)
+    public function cancelarSolicitudAmistad(string $busqueda, int $id_receptor)
     {
-        $usermodel = new \Com\TravelMates\Models\UsuarioModel();
-        $result = $usermodel->cancelarSolicitudAmistad($_SESSION['user']['id'], $id_receptor);
+        $model = new \Com\TravelMates\Models\AmistadesModel();
+        $result = $model->cancelarSolicitudAmistad($_SESSION['user']['id'], $id_receptor);
         if ($result) {
             //TODO: Ver como hacer que no se pierda la búsqueda al redirigir de nuevo
+            header('location:/buscar-usuario/'.$busqueda);
         } else {
 
         }
@@ -113,10 +116,8 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
     {
         if (!empty($files['url_img']['tmp_name'])) {
             $imgurModel = new \Com\TravelMates\Models\ImgurModel();
-
-        $fotoPerfil = $files['url_img']['tmp_name'];
-        $post['url_img'] = $imgurModel->obtenerUrl($fotoPerfil);
-        }        
+            $post['url_img'] = $imgurModel->obtenerUrl($files['url_img']);
+        }
 
         $usermodel = new \Com\TravelMates\Models\UsuarioModel();
         $usuario = $usermodel->obtenerUsuarioPorId($id_usuario);

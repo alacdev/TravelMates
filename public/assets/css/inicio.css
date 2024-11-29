@@ -21,6 +21,7 @@
 
 .publicacion p {
     margin: 10px 0;
+    text-decoration: none !important;
 }
 
 .acciones a {

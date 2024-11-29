@@ -14,13 +14,15 @@ class InicioController extends \Com\TravelMates\Core\BaseController
             'breadcrumb' => ['Inicio']
         );
 
-        if (isset($_SESSION['user'])) {
-            $model = new \Com\TravelMates\Models\PublicacionModel();
-            $publicaciones = $model->getAll();
-            $data['publicaciones'] = $publicaciones;
+        $publicacionModel = new \Com\TravelMates\Models\PublicacionModel();
+        $publicaciones = $publicacionModel->obtenerPublicaciones();
+        foreach ($publicaciones as &$publicacion) {
+            $publicacion['me_gusta'] = $publicacionModel->verificarMeGusta($_SESSION['user']['id'], $publicacion['id']);
         }
 
-
+        if (isset($_SESSION['user'])) {
+            $data['publicaciones'] = $publicaciones;
+        }        
 
         $this->view->showViews(array('templates/header.view.php', 'inicio.view.php', 'templates/footer.view.php'), $data);
     }

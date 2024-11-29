@@ -43,6 +43,21 @@ class FrontController
                 $controlador->inicio();
             }, 'get');
 
+            Route::add('/usuario/([0-9]+)', function ($id_usuario) {
+                $controlador = new \Com\TravelMates\Controllers\UsuarioController();
+                $controlador->mostrarUsuario($id_usuario);
+            }, 'get');
+
+            Route::add('/me-gusta/([0-9]+)', function ($id_publicacion) {
+                $controlador = new \Com\TravelMates\Controllers\PublicacionController();
+                $controlador->meGusta($_SESSION['user']['id'], $id_publicacion);
+            }, 'post');
+            
+            Route::add('/no-me-gusta/([0-9]+)', function ($id_publicacion) {
+                $controlador = new \Com\TravelMates\Controllers\PublicacionController();
+                $controlador->noMeGusta($_SESSION['user']['id'], $id_publicacion);
+            }, 'post');
+
             Route::add('/cuenta', function () {
                 $controlador = new \Com\TravelMates\Controllers\CuentaController();
                 $controlador->mostrar();
@@ -63,14 +78,19 @@ class FrontController
                 $controlador->buscarUsuarios($_POST);
             }, 'post');
 
-            Route::add('/enviar-solicitud/([0-9]+)', function ($id_receptor) {
+            Route::add('/buscar-usuario/([^/]+)', function ($busqueda) {
                 $controlador = new \Com\TravelMates\Controllers\UsuarioController();
-                $controlador->enviarSolicitudAmistad($id_receptor);
+                $controlador->buscarUsuarios($post['busqueda'] = $busqueda);
+            }, 'post');
+
+            Route::add('/enviar-solicitud/([^/]+)/([0-9]+)', function ($busqueda, $id_receptor) {
+                $controlador = new \Com\TravelMates\Controllers\UsuarioController();
+                $controlador->enviarSolicitudAmistad($busqueda, $id_receptor);
             }, 'get');
 
-            Route::add('/cancelar-solicitud/([0-9]+)', function ($id_receptor) {
+            Route::add('/cancelar-solicitud/([^/]+)/([0-9]+)', function ($busqueda, $id_receptor) {
                 $controlador = new \Com\TravelMates\Controllers\UsuarioController();
-                $controlador->cancelarSolicitudAmistad($id_receptor);
+                $controlador->cancelarSolicitudAmistad($busqueda, $id_receptor);
             }, 'get');
 
             Route::add('/mapa', function () {

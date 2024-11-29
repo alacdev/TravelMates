@@ -17,8 +17,10 @@
                 ?>
                 <div class="publicacion">
                     <div class="publicacion-header">
-                        <p><img src="<?php echo ($usuario['url_img'] != null) ? $usuario['url_img'] : 'assets/img/defaultUser.png' ?>"
-                                class="foto-perfil">@<?php echo $publicacion['username'] ?></p>
+                        <a href="/usuario/<?php echo $usuario['id']?>" style="text-decoration: none; color: inherit;">
+                            <p><img src="<?php echo ($usuario['url_img'] != null) ? $usuario['url_img'] : 'assets/img/defaultUser.png' ?>"
+                                    class="foto-perfil">@<?php echo $publicacion['username'] ?></p>
+                        </a>
                     </div>
                     <div class="publicacion-body">
                         <img src="<?php echo $publicacion['url_img'] ?>"
@@ -27,8 +29,10 @@
                     </div>
                     <div class="publicacion-footer">
                         <span class="acciones">
-                            <a><i class="fa fa-heart"></i></a>
-                            <a><i class="fa fa-comment"></i></a>
+                            <a href="javascript:void(0);"
+                                onclick="toggleLike(<?php echo $publicacion['id']; ?>, <?php echo $publicacion['me_gusta'] ? 'false' : 'true'; ?>)">
+                                <i id="heart-<?php echo $publicacion['id']; ?>" class="fa fa-heart" <?php echo $publicacion['me_gusta'] ? 'style="color: red;"' : ''; ?>></i>
+                            </a>
                         </span>
                         <span class="fecha"><?php echo $publicacion['fecha'] ?></span>
                     </div>
@@ -40,6 +44,8 @@
         </section>
     <?php } ?>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/inicio.js"></script>
 </body>
 
 </html>

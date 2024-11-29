@@ -44,14 +44,20 @@
                     <p class="mb-0 text-muted"><?php echo $usuario['nombre_completo']; ?></p>
                   </td>
                   <td class="text-end">
-                  <?php if ($usuario['solicitud_enviada']) { ?>
-                    <a href="/cancelar-solicitud/<?php echo $usuario['id']; ?>"><button class="btn btn-success btn-sm"><i class="fa fa-time"></i> Pendiente</button></a>
-                  <?php } else { ?>
-                    <a href="/enviar-solicitud/<?php echo $usuario['id']; ?>" class="btn btn-primary btn-sm">
-                        <i class="fa fa-paper-plane"></i> Enviar solicitud
-                    </a>
-                  <?php } ?>
-                </td>
+                    <?php if ($usuario['solicitud_enviada']) { ?>
+                      <a href="/cancelar-solicitud/<?php echo $_POST['busqueda'] ?>/<?php echo $usuario['id']; ?>">
+                        <button class="btn btn-success btn-sm"
+                          onmouseover="this.classList.replace('btn-success', 'btn-danger'); this.innerHTML = '<i class=\'fa fa-times\'></i>&nbsp; Cancelar Solicitud'"
+                          onmouseout="this.classList.replace('btn-danger', 'btn-success'); this.innerHTML = '<i class=\'fa fa-clock\'></i>&nbsp; Pendiente'">
+                          <i class="fa fa-clock"></i>&nbsp; Pendiente
+                        </button>
+                      </a>
+                    <?php } else { ?>
+                      <a href="/enviar-solicitud/<?php echo $_POST['busqueda'] ?>/<?php echo $usuario['id']; ?>" class="btn btn-primary btn-sm">
+                        <i class="fa fa-paper-plane"></i>&nbsp; Enviar solicitud
+                      </a>
+                    <?php } ?>
+                  </td>
                 </tr>
               <?php } ?>
             <?php } ?>
@@ -79,10 +85,11 @@
                 </td>
                 <td class="text-end">
                   <?php if ($usuario['solicitud_enviada']) { ?>
-                    <a href="/cancelar-solicitud/<?php echo $usuario['id']; ?>"><button class="btn btn-success btn-sm"><i class="fa fa-time"></i> Pendiente</button></a>
+                    <a href="/cancelar-solicitud/<?php echo $usuario['id']; ?>"><button class="btn btn-success btn-sm"><i
+                          class="fa fa-time"></i> Pendiente</button></a>
                   <?php } else { ?>
                     <a href="/enviar-solicitud/<?php echo $usuario['id']; ?>" class="btn btn-primary btn-sm">
-                        Enviar solicitud
+                      Enviar solicitud
                     </a>
                   <?php } ?>
                 </td>

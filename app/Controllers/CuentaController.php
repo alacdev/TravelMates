@@ -17,10 +17,8 @@ class CuentaController extends \Com\TravelMates\Core\BaseController
 
     public function actualizarCuenta(array $post, array $files)
     {
-        $imgurModel = new \Com\TravelMates\Models\ImgurModel();
-
-        $fotoPerfil = $files['url_img']['tmp_name'];
-        $post['url_img'] = $imgurModel->obtenerUrl($fotoPerfil);
+        $imgurModel = new \Com\TravelMates\Models\ImgurModel();        
+        $post['url_img'] = $imgurModel->obtenerUrl($files['url_img']);
 
         $errores = $this->checkFormActualizarCuenta($post);
         if (count($errores) > 0) {

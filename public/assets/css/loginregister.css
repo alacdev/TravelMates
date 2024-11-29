@@ -22,9 +22,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
 }
 
 body {    
-    background-image: url('../img/TravelMates.png');
+    /* background-image: url('../img/TravelMates.png');
     background-repeat: repeat;
-    background-size: 5%;
+    background-size: 5%; */
+    background-color: #e8f1ff;
     opacity: 95%;
 }
 
