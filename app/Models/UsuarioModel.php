@@ -103,6 +103,17 @@ class UsuarioModel extends \Com\TravelMates\Core\BaseDbModel
         return $stmt->rowCount() > 0;
     }
 
+    public function borrarFotoPerfil(int $id_usuario)
+    {
+        $stmt = $this->pdo->prepare('UPDATE usuarios SET url_img = NULL WHERE id = ?');
+        $stmt->execute([$id_usuario]);
+        if ($stmt->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     //TODO: Actualizar cuando haya intereses y foto de perfil
     function actualizarUsuario(int $id_usuario, array $post): bool
     {

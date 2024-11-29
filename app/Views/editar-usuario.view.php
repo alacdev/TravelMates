@@ -12,12 +12,20 @@
         </div>
         <div class="card-body">
             <form action="/editar-usuario/<?php echo $usuario['id'] ?>" method="POST" enctype="multipart/form-data">
-                <div class="form-group" id="foto">
-                    <img src="<?php echo ($usuario['url_img'] != null) ? $usuario['url_img'] : 'assets/img/defaultUser.png'; ?>"
-                        class="foto-perfil img-thumbnail" id="foto-preview" alt="Foto de perfil de @<?php echo $usuario['username']?>">
+            <div class="form-group" id="foto">
+                    <div class="image-container">
+                        <img src="<?php echo ($usuario['url_img'] != null) ? $usuario['url_img'] : 'assets/img/defaultUser.png'; ?>"
+                            class="foto-perfil img-thumbnail" id="foto-preview"
+                            alt="Foto de perfil de @<?php echo $usuario['username'] ?>">
+
+                        <div class="overlay">
+                            <a href="/borrar-foto-perfil/<?php echo $usuario['id'] ?>"><i class="fa fa-trash"></i></a>
+                        </div>
+                    </div>
 
                     <label for="foto-perfil" class="btn btn-link">Cambiar foto de perfil</label>
-                    <input type="file" id="foto-perfil" name="url_img" accept="image/png, image/jpeg" style="display: none;">
+                    <input type="file" id="foto-perfil" name="url_img" accept="image/png, image/jpeg"
+                        style="display: none;">
                 </div>
                 <div class="form-group">
                     <label for="username">Nombre de usuario</label>

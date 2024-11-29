@@ -9,10 +9,12 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
     public function mostrarUsuario(int $idUsuario)
     {
         $usermodel = new \Com\TravelMates\Models\UsuarioModel();
+        $publicacionModel = new \Com\TravelMates\Models\PublicacionModel();
         $data = array(
             'titulo' => 'Usuarios',
             'breadcrumb' => ['Gestión de usuarios'],
-            'usuario' => $usermodel->obtenerUsuarioPorId($idUsuario)
+            'usuario' => $usermodel->obtenerUsuarioPorId($idUsuario),
+            'publicaciones' => $publicacionModel->obtenerPublicacionesPorIdUsuario($idUsuario) 
         );
 
         $this->view->showViews(array('templates/header.view.php', 'usuario.view.php', 'templates/footer.view.php'), $data);

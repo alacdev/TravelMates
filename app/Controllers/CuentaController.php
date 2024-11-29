@@ -35,6 +35,13 @@ class CuentaController extends \Com\TravelMates\Core\BaseController
 
     }
 
+    public function borrarFotoPerfil(int $id_usuario)
+    {
+        $usuarioModel = new \Com\TravelMates\Models\UsuarioModel();
+        $usuarioModel->borrarFotoPerfil($id_usuario);
+        header('location:/cuenta');
+    }
+
     private function checkFormActualizarCuenta(array $post): array
     {
         $userModel = new \Com\TravelMates\Models\UsuarioModel();

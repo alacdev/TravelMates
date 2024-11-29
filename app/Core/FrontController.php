@@ -63,6 +63,11 @@ class FrontController
                 $controlador->mostrar();
             }, 'get');
 
+            Route::add('/borrar-foto-perfil/([0-9]+)', function ($id_usuario) {
+                $controlador = new \Com\TravelMates\Controllers\CuentaController();
+                $controlador->borrarFotoPerfil($id_usuario);
+            }, 'get');
+
             Route::add('/actualizar-cuenta', function () {
                 $controlador = new \Com\TravelMates\Controllers\CuentaController();
                 $controlador->actualizarCuenta($_POST, isset($_FILES) && !empty($_FILES) ? $_FILES : []);

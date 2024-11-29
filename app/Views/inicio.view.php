@@ -13,18 +13,18 @@
             <?php
             $usuarioModel = new \Com\TravelMates\Models\UsuarioModel();
             foreach ($publicaciones as $publicacion) {
-                $usuario = $usuarioModel->obtenerUsuarioPorUsername($publicacion['username']);
+                $usuario = $usuarioModel->obtenerUsuarioPorId($publicacion['id_usuario']);
                 ?>
                 <div class="publicacion">
                     <div class="publicacion-header">
                         <a href="/usuario/<?php echo $usuario['id']?>" style="text-decoration: none; color: inherit;">
                             <p><img src="<?php echo ($usuario['url_img'] != null) ? $usuario['url_img'] : 'assets/img/defaultUser.png' ?>"
-                                    class="foto-perfil">@<?php echo $publicacion['username'] ?></p>
+                                    class="foto-perfil">@<?php echo $usuario['username'] ?></p>
                         </a>
                     </div>
                     <div class="publicacion-body">
                         <img src="<?php echo $publicacion['url_img'] ?>"
-                            alt="Publicación de <?php echo $publicacion['username'] ?> el <?php echo $publicacion['fecha'] ?>" />
+                            alt="Publicación de <?php echo $usuario['username'] ?> el <?php echo $publicacion['fecha'] ?>" />
                         <p><?php echo $publicacion['texto'] ?></p>
                     </div>
                     <div class="publicacion-footer">

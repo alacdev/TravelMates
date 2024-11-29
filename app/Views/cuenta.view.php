@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="assets/css/cuentaeditar.css">
-    
+
 </head>
 
 <body>
@@ -14,12 +14,21 @@
         <div class="card-body text-center">
             <form action="/actualizar-cuenta" method="POST" enctype="multipart/form-data">
                 <div class="form-group" id="foto">
-                    <img src="<?php echo ($_SESSION['user']['url_img'] != null) ? $_SESSION['user']['url_img'] : 'assets/img/defaultUser.png'; ?>"
-                        class="foto-perfil img-thumbnail" id="foto-preview" alt="Foto de perfil de @<?php echo $_SESSION['user']['username']?>">
+                    <div class="image-container">
+                        <img src="<?php echo ($_SESSION['user']['url_img'] != null) ? $_SESSION['user']['url_img'] : 'assets/img/defaultUser.png'; ?>"
+                            class="foto-perfil img-thumbnail" id="foto-preview"
+                            alt="Foto de perfil de @<?php echo $_SESSION['user']['username'] ?>">
+
+                        <div class="overlay">
+                            <a href="/borrar-foto-perfil/<?php echo $_SESSION['user']['id'] ?>"><i class="fa fa-trash"></i></a>
+                        </div>
+                    </div>
 
                     <label for="foto-perfil" class="btn btn-link">Cambiar foto de perfil</label>
-                    <input type="file" id="foto-perfil" name="url_img" accept="image/png, image/jpeg" style="display: none;">
+                    <input type="file" id="foto-perfil" name="url_img" accept="image/png, image/jpeg"
+                        style="display: none;">
                 </div>
+
                 <div class="form-group">
                     <label for="username">Nombre de usuario</label>
                     <input type="text" class="form-control" id="username" name="username"

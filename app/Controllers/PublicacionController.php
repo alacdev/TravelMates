@@ -16,7 +16,7 @@ class PublicacionController extends \Com\TravelMates\Core\BaseController {
 
         $post['url_img'] = $imgurModel->obtenerUrl($archivo);
 
-        $result = $publicacionModel->nuevaPublicacion($post['url_img'], $_SESSION['user']['username'], $post['texto'], date_create('now')->format('Y-m-d H:i:s'));
+        $result = $publicacionModel->nuevaPublicacion($post['url_img'], $_SESSION['user']['id'], $post['texto'], date_create('now')->format('Y-m-d H:i:s'));
 
         if ($result) {
             header('location:/');
