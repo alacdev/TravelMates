@@ -62,31 +62,18 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
         $this->view->showViews(array('templates/header.view.php', 'buscar-usuario.view.php', 'templates/footer.view.php'), $data);
     }
 
-    public function enviarSolicitudAmistad(string $busqueda, int $id_receptor)
+    public function enviarSolicitudAmistad(int $id_receptor)
     {
         $model = new \Com\TravelMates\Models\AmistadesModel();
-
-        $result = $model->enviarSolicitudAmistad($_SESSION['user']['id'], $id_receptor);
-        if ($result) {
-            header('location:/buscar-usuario/'.$busqueda);
-            //TODO: Ver como hacer que no se pierda la búsqueda al redirigir de nuevo
-        } else {
-
-        }
-
+        $resultado = $model->enviarSolicitudAmistad($_SESSION['user']['id'], $id_receptor);
+        echo json_encode(['success' => $resultado]);
     }
 
-    public function cancelarSolicitudAmistad(string $busqueda, int $id_receptor)
+    public function cancelarSolicitudAmistad(int $id_receptor)
     {
         $model = new \Com\TravelMates\Models\AmistadesModel();
-        $result = $model->cancelarSolicitudAmistad($_SESSION['user']['id'], $id_receptor);
-        if ($result) {
-            //TODO: Ver como hacer que no se pierda la búsqueda al redirigir de nuevo
-            header('location:/buscar-usuario/'.$busqueda);
-        } else {
-
-        }
-
+        $resultado = $model->cancelarSolicitudAmistad($_SESSION['user']['id'], $id_receptor);
+        echo json_encode(['success' => $resultado]);
     }
 
     public function eliminarUsuario(int $id_usuario)

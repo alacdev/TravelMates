@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace Com\TravelMates\Models;
+use Imagick;
 
 class ImgurModel extends \Com\TravelMates\Core\BaseDbModel
 {
@@ -16,11 +17,13 @@ class ImgurModel extends \Com\TravelMates\Core\BaseDbModel
      */
     public function obtenerUrl($archivo)
     {
-        // $archivoRecortado = $this->cropImageToSquare($archivo);
-        // $image_data = base64_encode(file_get_contents($archivoRecortado['tmp_name']));
-        
-        $image_data = base64_encode(file_get_contents($archivo['tmp_name']));
+        $tempFile = tempnam(sys_get_temp_dir(), 'img_');
+        $this->cropAndResizeImage($archivo['tmp_name'], $tempFile);
 
+
+        $image_data = base64_encode(file_get_contents($tempFile));
+        unlink($tempFile);
+        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'https://api.imgur.com/3/image');
         curl_setopt($ch, CURLOPT_POST, true);
@@ -30,7 +33,7 @@ class ImgurModel extends \Com\TravelMates\Core\BaseDbModel
         ]);
         curl_setopt($ch, CURLOPT_POSTFIELDS, [
             'image' => $image_data
-        ]);
+        ]);        
 
         $response = curl_exec($ch);
         curl_close($ch);
@@ -40,46 +43,15 @@ class ImgurModel extends \Com\TravelMates\Core\BaseDbModel
         if (isset($response_data['data']['link'])) {
             return $response_data['data']['link'];
         } else {
-            //error
             return 'null';
         }
     }
 
-    function cropImageToSquare($fileInput)
+    public function cropAndResizeImage($imagePath, $outputPath, $width = 500, $height = 500)
     {
-        $info = getimagesize($fileInput);
-        switch ($info[2]) {
-            case IMAGETYPE_JPEG:
-                $sourceImage = imagecreatefromjpeg($fileInput);
-                break;
-            case IMAGETYPE_PNG:
-                $sourceImage = imagecreatefrompng($fileInput);
-                break;
-        }
-        $width = imagesx($sourceImage);
-        $height = imagesy($sourceImage);
-
-        $size = min($width, $height);
-        $x = ($width - $size) / 2;
-        $y = ($height - $size) / 2;
-
-        $croppedImage = imagecreatetruecolor($size, $size);
-        imagecopy($croppedImage, $sourceImage, 0, 0, $x, $y, $size, $size);
-
-        $tempFile = tempnam(sys_get_temp_dir(), 'cropped_');
-        imagepng($croppedImage, $tempFile);
-
-        imagedestroy($sourceImage);
-        imagedestroy($croppedImage);
-
-        return [
-            'name' => 'cropped_' . $fileInput['name'],
-            'type' => 'image/png',
-            'tmp_name' => $tempFile,
-            'error' => 0,
-            'size' => filesize($tempFile)
-        ];
+        $imagick = new Imagick($imagePath);
+        $imagick->cropThumbnailImage($width, $height);
+        $imagick->writeImage($outputPath);
+        return true;
     }
-
-
 }

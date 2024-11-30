@@ -88,15 +88,15 @@ class FrontController
                 $controlador->buscarUsuarios($post['busqueda'] = $busqueda);
             }, 'post');
 
-            Route::add('/enviar-solicitud/([^/]+)/([0-9]+)', function ($busqueda, $id_receptor) {
+            Route::add('/enviar-solicitud/([0-9]+)', function ($id_receptor) {
                 $controlador = new \Com\TravelMates\Controllers\UsuarioController();
-                $controlador->enviarSolicitudAmistad($busqueda, $id_receptor);
-            }, 'get');
+                $controlador->enviarSolicitudAmistad($id_receptor);
+            }, 'post');
 
-            Route::add('/cancelar-solicitud/([^/]+)/([0-9]+)', function ($busqueda, $id_receptor) {
+            Route::add('/cancelar-solicitud/([0-9]+)', function ($id_receptor) {
                 $controlador = new \Com\TravelMates\Controllers\UsuarioController();
-                $controlador->cancelarSolicitudAmistad($busqueda, $id_receptor);
-            }, 'get');
+                $controlador->cancelarSolicitudAmistad($id_receptor);
+            }, 'post');
 
             Route::add('/mapa', function () {
                 $controlador = new \Com\TravelMates\Controllers\MapaController();
