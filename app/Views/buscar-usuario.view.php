@@ -36,7 +36,7 @@
                 <tr class="usuario-busqueda">
                   <td class="text-center">
                     <img
-                      src="<?php echo ($_SESSION['user']['url_img'] != null) ? $_SESSION['user']['url_img'] : 'assets/img/defaultUser.png'; ?>"
+                      src="<?php echo ($usuario['url_img'] != null) ? $usuario['url_img'] : 'assets/img/defaultUser.png'; ?>"
                       alt="Foto de perfil de @<?php echo $usuario['username']; ?>" class="avatar rounded-circle">
                   </td>
                   <td>

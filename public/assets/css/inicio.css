@@ -1,17 +1,81 @@
+.boton-nueva-publicacion {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.boton-nueva-publicacion a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.boton-nueva-publicacion a:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+.boton-nueva-publicacion i {
+    font-size: 24px;
+}
+
+.publicaciones-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.publicaciones {
+    max-width: 600px;
+}
+
 .publicacion {
+    display: flex;
+    flex-direction: column;
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 15px;
-    margin: 10px 0;
+    margin: 20px 0;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.publicacion-header,
+.publicacion-body,
+.publicacion-footer {
+    width: 100%;
+}
+
+.publicacion-header a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
 }
 
 .foto-perfil {
     border-radius: 50%;
     width: 30px;
+    height: 30px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.5);
     margin-right: 10px;
+    object-fit: cover;
+}
+
+.publicacion-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .publicacion-body img {
@@ -19,13 +83,22 @@
     border-radius: 10px;
 }
 
-.publicacion p {
+.publicacion-body p {
+    align-self: flex-start;
     margin: 10px 0;
-    text-decoration: none !important;
+}
+
+.publicacion-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.acciones {
+    align-self: flex-start;
 }
 
 .acciones a {
-    margin-right: 10px;
     color: #333;
     text-decoration: none;
 }
@@ -35,5 +108,5 @@
 }
 
 .fecha {
-    align-self: end;
+    margin-left: auto;
 }

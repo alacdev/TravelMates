@@ -30,6 +30,14 @@
                 </a>
             </li> 
             <li class="nav-item">
+                <a href="/solicitudes-recibidas" class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/solicitudes-recibidas') ? 'active' : ''; ?>">
+                    <i class="nav-icon fa fa-handshake"></i>
+                    <p>
+                        Solicitudes recibidas
+                    </p>
+                </a>
+            </li> 
+            <li class="nav-item">
                 <a href="/mapa" class="nav-link <?php echo ($_SERVER['REQUEST_URI'] == '/mapa') ? 'active' : ''; ?>">
                     <i class="nav-icon fa fa-map"></i>
                     <p>

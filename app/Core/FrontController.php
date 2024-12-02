@@ -73,6 +73,21 @@ class FrontController
                 $controlador->actualizarCuenta($_POST, isset($_FILES) && !empty($_FILES) ? $_FILES : []);
             }, 'post');
 
+            Route::add('/solicitudes-recibidas', function () {
+                $controlador = new \Com\TravelMates\Controllers\SolicitudesController();
+                $controlador->mostrarSolicitudesRecibidas();
+            }, 'get');
+
+            Route::add('/aceptar-solicitud/([0-9]+)', function ($id_solicitud) {
+                $controlador = new \Com\TravelMates\Controllers\SolicitudesController();
+                $controlador->aceptarSolicitud($id_solicitud);
+            }, 'get');
+
+            Route::add('/rechazar-solicitud/([0-9]+)', function ($id_solicitud) {
+                $controlador = new \Com\TravelMates\Controllers\SolicitudesController();
+                $controlador->rechazarSolicitud($id_solicitud);
+            }, 'get');
+
             Route::add('/buscar-usuario', function () {
                 $controlador = new \Com\TravelMates\Controllers\UsuarioController();
                 $controlador->mostrarBuscarUsuarios();

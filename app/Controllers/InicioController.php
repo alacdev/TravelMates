@@ -27,6 +27,27 @@ class InicioController extends \Com\TravelMates\Core\BaseController
         $this->view->showViews(array('templates/header.view.php', 'inicio.view.php', 'templates/footer.view.php'), $data);
     }
 
+    public function tiempoTranscurrido($fecha) {
+        $ahora = time();
+        $publicacion = strtotime($fecha);
+        $diferencia = $ahora - $publicacion;
+    
+        $segundos = $diferencia;
+        $minutos = round($diferencia / 60);
+        $horas = round($diferencia / 3600);
+        $dias = round($diferencia / 86400);
+    
+        if ($segundos < 60) {
+            return "hace " . $segundos . " segundos";
+        } elseif ($minutos < 60) {
+            return "hace " . $minutos . " minutos";
+        } elseif ($horas < 24) {
+            return "hace " . $horas . " horas";
+        } else {
+            return "hace " . $dias . " días";
+        }
+    }
+
     public function mostrarLogin()
     {
         $this->view->show('login.view.php');
