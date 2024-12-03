@@ -2,8 +2,6 @@
 
 namespace Com\TravelMates\Controllers;
 
-use Com\TravelMates\Models\PublicacionesModel;
-
 class InicioController extends \Com\TravelMates\Core\BaseController
 {
 
@@ -15,7 +13,7 @@ class InicioController extends \Com\TravelMates\Core\BaseController
         );
 
         $publicacionModel = new \Com\TravelMates\Models\PublicacionModel();
-        $publicaciones = $publicacionModel->obtenerPublicaciones();
+        $publicaciones = $publicacionModel->obtenerPublicaciones($_SESSION['user']['id']);
         foreach ($publicaciones as &$publicacion) {
             $publicacion['me_gusta'] = $publicacionModel->verificarMeGusta($_SESSION['user']['id'], $publicacion['id']);
         }

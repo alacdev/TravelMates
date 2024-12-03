@@ -20,9 +20,11 @@
 
 <body id="register" class="hold-transition register-page">
     <div class="register-box">
+        <div class="logo">
+            <img src="assets/img/TravelMates.png" alt="Logo TravelMates" />
+        </div>
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">¿Quieres formar parte de esta gran familia?</p>
 
                 <form action="/register" method="post">
                     <div class="input-group mb-3">
@@ -38,6 +40,9 @@
                                 <?php echo isset($_SESSION['errores_register']['username']) ? $_SESSION['errores_register']['username'] : '' ?>
                             </p>
                         <?php } ?>
+                    </div>
+                    <div class="input-group mb-3">
+
                         <input type="text" name="nombre_completo" class="form-control" placeholder="Nombre completo"
                             value="<?php echo isset($_POST['nombre_completo']) ? $_POST['nombre_completo'] : '' ?>"
                             required>
@@ -96,16 +101,16 @@
                     </div>
 
                     <div class="input-group mb-3">
-                        <input type="text" name="residencia" id="residencia" class="form-control"
+                        <input type="text" name="residencia" id="residencia" class="form-control" autocomplete="off"
                             placeholder="Lugar actual de residencia"
                             value="<?php echo isset($_POST['residencia']) ? $_POST['residencia'] : '' ?>" required>
+                        <div id="sugerencias" class="sugerencias"></div>
+
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-location-arrow"></span>
                             </div>
                         </div>
-                        <ul id="sugerencias" class="list-group position-absolute w-100 mt-1">
-                        </ul>
                     </div>
                     <?php if (isset($_SESSION['errores_register']['residencia'])) { ?>
                         <p class="login-box-msg text-danger">

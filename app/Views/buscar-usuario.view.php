@@ -44,18 +44,25 @@
                     <p class="mb-0 text-muted"><?php echo $usuario['nombre_completo']; ?></p>
                   </td>
                   <td class="text-end">
-                    <?php if ($usuario['solicitud_enviada']) { ?>
+                    <?php $amistadesModel = new \Com\TravelMates\Models\AmistadesModel();
+                    if ($amistadesModel->esAmigo($usuario['id'])) { ?>
                       <button class="btn btn-success btn-sm" data-usuario-id="<?php echo $usuario['id']; ?>"
                         data-busqueda="<?php echo htmlspecialchars($_POST['busqueda']); ?>"
-                        onclick="manejarSolicitud(this, 'cancelar')">
-                        <i class="fa fa-clock"></i>&nbsp; Pendiente
+                        onclick="manejarSolicitud(this, 'cancelar')" onmouseover="">
+                        <i class="fa fa-smile"></i>&nbsp; Amigo
                       </button>
+                    <?php } else if ($usuario['solicitud_enviada']) { ?>
+                        <button class="btn btn-success btn-sm" data-usuario-id="<?php echo $usuario['id']; ?>"
+                          data-busqueda="<?php echo htmlspecialchars($_POST['busqueda']); ?>"
+                          onclick="manejarSolicitud(this, 'cancelar')">
+                          <i class="fa fa-clock"></i>&nbsp; Pendiente
+                        </button>
                     <?php } else { ?>
-                      <button class="btn btn-primary btn-sm" data-usuario-id="<?php echo $usuario['id']; ?>"
-                        data-busqueda="<?php echo htmlspecialchars($_POST['busqueda']); ?>"
-                        onclick="manejarSolicitud(this, 'enviar')">
-                        <i class="fa fa-paper-plane"></i>&nbsp; Enviar solicitud
-                      </button>
+                        <button class="btn btn-primary btn-sm" data-usuario-id="<?php echo $usuario['id']; ?>"
+                          data-busqueda="<?php echo htmlspecialchars($_POST['busqueda']); ?>"
+                          onclick="manejarSolicitud(this, 'enviar')">
+                          <i class="fa fa-paper-plane"></i>&nbsp; Enviar solicitud
+                        </button>
                     <?php } ?>
                   </td>
                 </tr>

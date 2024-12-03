@@ -14,14 +14,12 @@
     </head>
     <body id="login" class="hold-transition login-page">
         <div class="login-box">
-            <div class="login-logo">
-<!--                <a href="#"><b>Travel</b>Mates</a>-->
-                <!--<img src="assets/img/TravelMates.png" alt="alt"/>-->                
+            <div class="logo">
+                <img src="assets/img/TravelMates.png" alt="Logo TravelMates"/>                
             </div>
             <!-- /.login-logo -->
             <div class="card">
                 <div class="card-body login-card-body">
-                    <p class="login-box-msg">¡Bienvenido a TravelMates!</p>
                     <form action="/login" method="post">
                         <div class="input-group mb-3">
                             <input type="text" name="username" class="form-control" placeholder="Nombre de usuario" required>

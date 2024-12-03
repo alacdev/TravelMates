@@ -13,11 +13,31 @@ class PublicacionModel extends \Com\TravelMates\Core\BaseDbModel
         return $stmt->fetchAll();
     }
 
-    function obtenerPublicaciones(): array
+    function obtenerPublicaciones(int $id_usuario): array
     {
-        $stmt = $this->pdo->query('SELECT * FROM publicaciones ORDER BY fecha DESC');
+        $amistadesModel = new \Com\TravelMates\Models\AmistadesModel();
+        $amistades = $amistadesModel->obtenerAmistades($id_usuario);
+
+        $ids_amigos = array_map(fn($amistad) => $amistad['id_amigo'], $amistades);
+
+        if (empty($ids_amigos)) {
+            return [];
+        }
+
+        $placeholders = implode(',', array_fill(0, count($ids_amigos), '?'));
+
+        $stmt = $this->pdo->prepare("
+        SELECT * 
+        FROM publicaciones 
+        WHERE id_usuario IN ($placeholders)
+        ORDER BY fecha DESC
+    ");
+
+        $stmt->execute($ids_amigos);
+
         return $stmt->fetchAll();
     }
+
 
     function obtenerPublicacionesPorIdUsuario(int $id_usuario): array
     {

@@ -49,6 +49,12 @@
             </div>
         </section>
     <?php } ?>
+    <?php if (count($publicaciones) == 0) { ?>
+        <section class="publicaciones-container">
+            <p class="text-muted">Haz amistades para ver aquí sus publicaciones</p>
+        </section>
+    <?php } ?>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="assets/js/inicio.js"></script>

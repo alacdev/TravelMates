@@ -45,11 +45,11 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
     public function buscarUsuarios(array $post)
     {
         $userModel = new \Com\TravelMates\Models\UsuarioModel();
-        $amistadesModel = new \Com\TravelMates\Models\AmistadesModel();
+        $solicitudesModel = new \Com\TravelMates\Models\SolicitudesModel();
         $busqueda = $post['busqueda'];
         $usuariosBusqueda = $userModel->buscarUsuarios($_SESSION['user']['id'], $busqueda);
         foreach ($usuariosBusqueda as &$usuario) {
-            $usuario['solicitud_enviada'] = $amistadesModel->verificarSolicitud($_SESSION['user']['id'], $usuario['id']);
+            $usuario['solicitud_enviada'] = $solicitudesModel->verificarSolicitud($_SESSION['user']['id'], $usuario['id']);
         }
 
         $data = array(
@@ -64,14 +64,14 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
 
     public function enviarSolicitudAmistad(int $id_receptor)
     {
-        $model = new \Com\TravelMates\Models\AmistadesModel();
+        $model = new \Com\TravelMates\Models\SolicitudesModel();
         $resultado = $model->enviarSolicitudAmistad($_SESSION['user']['id'], $id_receptor);
         echo json_encode(['success' => $resultado]);
     }
 
     public function cancelarSolicitudAmistad(int $id_receptor)
     {
-        $model = new \Com\TravelMates\Models\AmistadesModel();
+        $model = new \Com\TravelMates\Models\SolicitudesModel();
         $resultado = $model->cancelarSolicitudAmistad($_SESSION['user']['id'], $id_receptor);
         echo json_encode(['success' => $resultado]);
     }

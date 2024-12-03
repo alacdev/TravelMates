@@ -13,6 +13,33 @@ class SolicitudesModel extends \Com\TravelMates\Core\BaseDbModel
         return $stmt->fetchAll();
     }
 
+    function enviarSolicitudAmistad(int $id_emisor, int $id_receptor)
+    {
+        $stmt = $this->pdo->prepare('INSERT INTO solicitudes_amistad (id_emisor, id_receptor) VALUES (?, ?)');
+        $stmt->execute([$id_emisor, $id_receptor]);
+
+        return $stmt->rowCount() > 0;
+    }
+
+    function cancelarSolicitudAmistad(int $id_emisor, int $id_receptor)
+    {
+        $stmt = $this->pdo->prepare('DELETE FROM solicitudes_amistad WHERE id_emisor = ? AND id_receptor = ?');
+        $stmt->execute([$id_emisor, $id_receptor]);
+
+        return $stmt->rowCount() > 0;
+    }
+
+    public function verificarSolicitud($id_emisor, $id_receptor)
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM solicitudes_amistad WHERE id_emisor = :id_emisor AND id_receptor = :id_receptor');
+        $stmt->execute([
+            'id_emisor' => $id_emisor,
+            'id_receptor' => $id_receptor
+        ]);
+
+        return $stmt->fetch();
+    }
+
     function aceptarSolicitud(int $id_solicitud)
     {
         $stmt1 = $this->pdo->prepare('SELECT * FROM solicitudes_amistad WHERE id = ?');
