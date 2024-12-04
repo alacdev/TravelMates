@@ -8,7 +8,7 @@
 
 <body>
     <div class="card">
-        <div class="card-header text-center">
+        <div class="card-header">
             <h3 class="card-title">Información de Perfil</h3>
         </div>
         <div class="card-body text-center">
@@ -28,7 +28,6 @@
                     <input type="file" id="foto-perfil" name="url_img" accept="image/png, image/jpeg"
                         style="display: none;">
                 </div>
-
                 <div class="form-group">
                     <label for="username">Nombre de usuario</label>
                     <input type="text" class="form-control" id="username" name="username"
@@ -48,6 +47,7 @@
                     <label for="residencia">Lugar actual de residencia</label>
                     <input type="text" class="form-control" id="residencia" name="residencia"
                         value="<?php echo $_SESSION['user']['residencia'] ?>">
+                    <div id="sugerencias" class="sugerencias"></div>
                 </div>
                 <div class="form-group">
                     <label for="pass_antigua">Contraseña actual</label>
@@ -60,10 +60,6 @@
                 <div class="form-group">
                     <label for="confirm_pass_nueva">Confirmar nueva contraseña</label>
                     <input type="password" class="form-control" id="confirm_pass_nueva" name="confirm_pass_nueva">
-                </div>
-                <div class="form-group">
-                    <label for="intereses">Intereses</label>
-                    <textarea class="form-control" id="intereses" name="intereses" rows="3"></textarea>
                 </div>
                 <!-- Botón para guardar -->
                 <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i>&nbsp;
