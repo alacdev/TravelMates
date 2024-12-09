@@ -11,13 +11,13 @@ class CuentaController extends \Com\TravelMates\Core\BaseController
             'titulo' => 'Cuenta',
             'breadcrumb' => ['Cuenta'],
             'usuario' => $_SESSION['user']
-        );        
+        );
         $this->view->showViews(array('templates/header.view.php', 'cuenta.view.php', 'templates/footer.view.php'), $data);
     }
 
     public function actualizarCuenta(array $post, array $files)
     {
-        $imgurModel = new \Com\TravelMates\Models\ImgurModel();        
+        $imgurModel = new \Com\TravelMates\Models\ImgurModel();
         $post['url_img'] = $imgurModel->obtenerUrl($files['url_img']);
 
         $errores = $this->checkFormActualizarCuenta($post);
@@ -33,13 +33,6 @@ class CuentaController extends \Com\TravelMates\Core\BaseController
             $this->mostrar();
         }
 
-    }
-
-    public function borrarFotoPerfil(int $id_usuario)
-    {
-        $usuarioModel = new \Com\TravelMates\Models\UsuarioModel();
-        $usuarioModel->borrarFotoPerfil($id_usuario);
-        header('location:/cuenta');
     }
 
     private function checkFormActualizarCuenta(array $post): array

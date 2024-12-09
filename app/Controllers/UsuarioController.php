@@ -10,11 +10,11 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
     {
         $usermodel = new \Com\TravelMates\Models\UsuarioModel();
         $publicacionModel = new \Com\TravelMates\Models\PublicacionModel();
+        $interesesModel = new \Com\TravelMates\Models\InteresesModel();
         $data = array(
-            'titulo' => 'Usuarios',
-            'breadcrumb' => ['Gestión de usuarios'],
             'usuario' => $usermodel->obtenerUsuarioPorId($idUsuario),
-            'publicaciones' => $publicacionModel->obtenerPublicacionesPorIdUsuario($idUsuario) 
+            'publicaciones' => $publicacionModel->obtenerPublicacionesPorIdUsuario($idUsuario),
+            'intereses' => $interesesModel->obtenerInteresesPorIdUsuario($idUsuario)
         );
 
         $this->view->showViews(array('templates/header.view.php', 'usuario.view.php', 'templates/footer.view.php'), $data);
@@ -24,8 +24,6 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
     {
         $usermodel = new \Com\TravelMates\Models\UsuarioModel();
         $data = array(
-            'titulo' => 'Usuarios',
-            'breadcrumb' => ['Gestión de usuarios'],
             'usuarios' => $usermodel->obtenerTodos()
         );
 
@@ -53,12 +51,10 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
         }
 
         $data = array(
-            'titulo' => 'Usuarios',
-            'breadcrumb' => ['Gestión de usuarios'],
             'usuariosRecomendados' => $userModel->obtenerUsuariosCompatibles($_SESSION['user']['id']),
             'usuariosBusqueda' => $usuariosBusqueda
         );
-        
+
         $this->view->showViews(array('templates/header.view.php', 'buscar-usuario.view.php', 'templates/footer.view.php'), $data);
     }
 
@@ -81,7 +77,9 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
         $usermodel = new \Com\TravelMates\Models\UsuarioModel();
         $result = $usermodel->eliminarUsuario($id_usuario);
         if (!$result) {
-            //error
+            $_SESSION['error'] = 'No se pudo eliminar el usuario. Intente nuevamente.';
+            header("location:/gestion-usuarios");
+            exit;
         } else {
             $interesesModel = new InteresesModel();
             $interesesModel->eliminarInteresesUsuario($id_usuario);
@@ -93,8 +91,6 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
     {
         $usermodel = new \Com\TravelMates\Models\UsuarioModel();
         $data = array(
-            'titulo' => 'Usuarios',
-            'breadcrumb' => ['Gestión de usuarios'],
             'usuario' => $usermodel->obtenerUsuarioPorId($id_usuario)
         );
 
@@ -118,7 +114,7 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
             }
             $result = $usermodel->actualizarUsuario($id_usuario, $post);
             if ($result) {
-                header("Location: /editar-usuario/" . $id_usuario);
+                $this->mostrarEditarUsuario($id_usuario);
             }
         }
     }

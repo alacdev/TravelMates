@@ -14,29 +14,35 @@ class PublicacionModel extends \Com\TravelMates\Core\BaseDbModel
     }
 
     function obtenerPublicaciones(int $id_usuario): array
-    {
-        $amistadesModel = new \Com\TravelMates\Models\AmistadesModel();
-        $amistades = $amistadesModel->obtenerAmistades($id_usuario);
+{
+    $amistadesModel = new \Com\TravelMates\Models\AmistadesModel();
+    $amistades = $amistadesModel->obtenerAmistades($id_usuario);
 
-        $ids_amigos = array_map(fn($amistad) => $amistad['id_amigo'], $amistades);
+    $ids_amigos = array_map(fn($amistad) => $amistad['id_amigo'], $amistades);
 
-        if (empty($ids_amigos)) {
-            return [];
-        }
+    $id_usuario_sesion = $_SESSION['user']['id'];
 
-        $placeholders = implode(',', array_fill(0, count($ids_amigos), '?'));
+    if (empty($ids_amigos)) {
+        $ids_amigos = [$id_usuario_sesion];
+    } else {
+        $ids_amigos[] = $id_usuario_sesion;
+    }
 
-        $stmt = $this->pdo->prepare("
+    $placeholders = implode(',', array_fill(0, count($ids_amigos), '?'));
+
+    // Preparar la consulta
+    $stmt = $this->pdo->prepare("
         SELECT * 
         FROM publicaciones 
         WHERE id_usuario IN ($placeholders)
         ORDER BY fecha DESC
     ");
 
-        $stmt->execute($ids_amigos);
+    $stmt->execute($ids_amigos);
 
-        return $stmt->fetchAll();
-    }
+    return $stmt->fetchAll();
+}
+
 
 
     function obtenerPublicacionesPorIdUsuario(int $id_usuario): array

@@ -1,3 +1,4 @@
+/* Estilo para la tarjeta */
 .card {
     width: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -20,25 +21,59 @@
 
 .card-body {
     padding: 20px;
-} 
-
-#foto {
-    text-align: center;
 }
 
+/* Foto de perfil */
 .foto-perfil {
-    width: 10%;
-    height: 10%;
+    width: 30px; /* Aseguramos un tamaño fijo para las imágenes de perfil */
+    height: 30px;
     cursor: pointer;
     border-radius: 50% !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
 .foto-perfil-label {
     cursor: pointer;
 }
 
+.intereses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 0;
+    padding-bottom: 10px;
+}
 
-/* Publicación */
+.badge {
+    font-size: 100%;
+}
+
+/* Sección de publicaciones */
+.publicaciones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; 
+    justify-items: center;
+    padding-top: 20px;
+}
+
+.no-publicaciones {
+    margin-top: 20px;
+}
+
+@media (max-width: 1024px) {
+    .publicaciones {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .publicaciones {
+        grid-template-columns: 1fr;
+    }
+}
+
 .publicacion {
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -46,18 +81,14 @@
     margin: 10px 0;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.foto-perfil {
-    border-radius: 50%;
-    width: 30px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-    margin-right: 10px;
+    width: 100%;
+    max-width: 350px;
 }
 
 .publicacion-body img {
-    max-width: 100%;
+    width: 100%;
     border-radius: 10px;
+    object-fit: cover;
 }
 
 .publicacion p {

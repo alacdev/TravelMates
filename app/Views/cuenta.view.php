@@ -18,11 +18,8 @@
                         <img src="<?php echo ($_SESSION['user']['url_img'] != null) ? $_SESSION['user']['url_img'] : 'assets/img/defaultUser.png'; ?>"
                             class="foto-perfil img-thumbnail" id="foto-preview"
                             alt="Foto de perfil de @<?php echo $_SESSION['user']['username'] ?>">
-
-                        <div class="overlay">
-                            <a href="/borrar-foto-perfil/<?php echo $_SESSION['user']['id'] ?>"><i class="fa fa-trash"></i></a>
-                        </div>
                     </div>
+
 
                     <label for="foto-perfil" class="btn btn-link">Cambiar foto de perfil</label>
                     <input type="file" id="foto-perfil" name="url_img" accept="image/png, image/jpeg"

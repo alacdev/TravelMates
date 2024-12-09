@@ -34,12 +34,12 @@
             <?php } else { ?>
               <?php foreach ($usuariosBusqueda as $usuario) { ?>
                 <tr class="usuario-busqueda">
-                  <td class="text-center">
+                  <td class="text-right clickable-cell" data-href="/usuario/<?php echo $usuario['id'] ?>">
                     <img
                       src="<?php echo ($usuario['url_img'] != null) ? $usuario['url_img'] : 'assets/img/defaultUser.png'; ?>"
                       alt="Foto de perfil de @<?php echo $usuario['username']; ?>" class="avatar rounded-circle">
                   </td>
-                  <td>
+                  <td class="clickable-cell" data-href="/usuario/<?php echo $usuario['id'] ?>">
                     <p class="mb-0 fw-bold"><?php echo $usuario['username']; ?></p>
                     <p class="mb-0 text-muted"><?php echo $usuario['nombre_completo']; ?></p>
                   </td>

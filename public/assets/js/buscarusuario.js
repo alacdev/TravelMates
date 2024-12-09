@@ -1,3 +1,9 @@
+document.querySelectorAll('.clickable-cell').forEach(function(cell) {
+    cell.addEventListener('click', function() {
+        window.location = cell.getAttribute('data-href');
+    });
+});
+
 function manejarSolicitud(boton, accion) {
     var usuarioId = $(boton).data('usuario-id');
     var busqueda = $(boton).data('busqueda');

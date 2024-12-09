@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         #map {
-            height: 80vh;
+            height: 90vh;
             width: 100%;
         }
     </style>
@@ -22,7 +22,7 @@
     }).addTo(map);
 
     function cargarMarcadores() {
-        fetch('/mapa/get_marcadores')
+        fetch('/mapa/get-marcadores')
             .then(response => response.json())
             .then(data => {
                 console.log(data);
@@ -47,7 +47,7 @@
                 .addTo(map)
                 .bindPopup(`<b>${mensaje}</b>`);
 
-            fetch('/mapa/add_marcador', {
+            fetch('/mapa/add-marcador', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
