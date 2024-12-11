@@ -63,6 +63,11 @@ class FrontController
                 $controlador->mostrar();
             }, 'get');
 
+            Route::add('/amigos', function () {
+                $controlador = new \Com\TravelMates\Controllers\UsuarioController();
+                $controlador->mostrarAmigos();
+            }, 'get');
+
             Route::add('/actualizar-cuenta', function () {
                 $controlador = new \Com\TravelMates\Controllers\CuentaController();
                 $controlador->actualizarCuenta($_POST, isset($_FILES) && !empty($_FILES) ? $_FILES : []);
@@ -123,10 +128,10 @@ class FrontController
                 $controlador->nuevoMarcador();
             }, 'post');
 
-            Route::add('/chat', function () {
-                $controlador = new \Com\TravelMates\Controllers\ChatController();
-                $controlador->mostrar();
-            }, 'get');
+            // Route::add('/chat', function () {
+            //     $controlador = new \Com\TravelMates\Controllers\ChatController();
+            //     $controlador->mostrar();
+            // }, 'get');
 
             Route::add('/nueva-publicacion', function () {
                 $controlador = new \Com\TravelMates\Controllers\PublicacionController();

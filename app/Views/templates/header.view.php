@@ -46,28 +46,6 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fa fa-bars"></i></a>
                 </li>
             </ul>
-
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <li class="nav-item">
-                    <?php
-                    echo isset($_COOKIE['dark']) ?
-                        '<a class="nav-link" href="/light" role="button">
-          <i class="fa fa-sun"></i>
-        </a>      
-      </li>' :
-                        '   <a class="nav-link" href="/dark" role="button">
-          <i class="fa fa-moon"></i>
-        </a>      
-      </li>';
-                    ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" role="button">
-                        <i class="fa fa-bell"></i>
-                    </a>
-                </li>
-            </ul>
         </nav>
         <!-- /.navbar -->
 

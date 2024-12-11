@@ -44,6 +44,26 @@ class AmistadesModel extends \Com\TravelMates\Core\BaseDbModel
         return $stmt->rowCount() > 0;
     }
 
+    public function obtenerAmigos(int $id_usuario): array
+{
+    $stmt = $this->pdo->prepare('
+        SELECT 
+            u.*
+        FROM amistades a
+        INNER JOIN usuarios u 
+            ON u.id = CASE 
+                        WHEN a.id_usuario1 = ? THEN a.id_usuario2
+                        ELSE a.id_usuario1
+                     END
+        WHERE a.id_usuario1 = ? OR a.id_usuario2 = ?;
+    ');
+
+    $stmt->execute([$id_usuario, $id_usuario, $id_usuario]);
+
+    return $stmt->fetchAll();
+}
+
+
 
 
 }

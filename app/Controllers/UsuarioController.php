@@ -40,6 +40,16 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
         $this->view->showViews(array('templates/header.view.php', 'buscar-usuario.view.php', 'templates/footer.view.php'), $data);
     }
 
+    public function mostrarAmigos()
+    {
+        $amistadesModel = new \Com\TravelMates\Models\AmistadesModel();
+        $data = array(
+            'amigos' => $amistadesModel->obtenerAmigos($_SESSION['user']['id'])
+        );
+
+        $this->view->showViews(array('templates/header.view.php', 'amigos.view.php', 'templates/footer.view.php'), $data);
+    }
+
     public function buscarUsuarios(array $post)
     {
         $userModel = new \Com\TravelMates\Models\UsuarioModel();
