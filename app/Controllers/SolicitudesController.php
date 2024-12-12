@@ -4,7 +4,13 @@ namespace Com\TravelMates\Controllers;
 
 use Com\TravelMates\Models\SolicitudesModel;
 
-class SolicitudesController extends \Com\TravelMates\Core\BaseController {
+class SolicitudesController extends \Com\TravelMates\Core\BaseController {    
+
+    /**
+     * Muestra la pantalla de solicitudes
+     *
+     * @return void
+     */
     public function mostrarSolicitudesRecibidas()
     {
         $solicitudesModel = new SolicitudesModel();
@@ -14,7 +20,13 @@ class SolicitudesController extends \Com\TravelMates\Core\BaseController {
         
         $this->view->showViews(array('templates/header.view.php', 'solicitudes-recibidas.view.php', 'templates/footer.view.php'), $data);
     }
-
+    
+    /**
+     * Acepta la solicitud pasada como parámetro
+     *
+     * @param  mixed $id_solicitud
+     * @return void
+     */
     public function aceptarSolicitud(int $id_solicitud) {
         $solicitudesModel = new SolicitudesModel();
         $respuesta = $solicitudesModel->aceptarSolicitud($id_solicitud);
@@ -25,7 +37,13 @@ class SolicitudesController extends \Com\TravelMates\Core\BaseController {
         }
 
     }
-
+    
+    /**
+     * Rechaza la solicitud pasada como parámetro
+     *
+     * @param  mixed $id_solicitud
+     * @return void
+     */
     public function rechazarSolicitud(int $id_solicitud) {
         $solicitudesModel = new SolicitudesModel();
         $respuesta = $solicitudesModel->rechazarSolicitud($id_solicitud);

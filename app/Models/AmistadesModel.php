@@ -5,7 +5,13 @@ declare(strict_types=1);
 namespace Com\TravelMates\Models;
 
 class AmistadesModel extends \Com\TravelMates\Core\BaseDbModel
-{
+{    
+    /**
+     * Obtiene los ids de usuario de las amistades del usuario pasado como parámetro. 
+     *
+     * @param  mixed $id_usuario
+     * @return array
+     */
     public function obtenerAmistades(int $id_usuario): array
     {
         $stmt = $this->pdo->prepare('
@@ -22,7 +28,13 @@ class AmistadesModel extends \Com\TravelMates\Core\BaseDbModel
 
         return $stmt->fetchAll();
     }
-
+    
+    /**
+     * Comprueba si existe amistad entre el usuario de la sesión y el que se pasa como parámetro.
+     *
+     * @param  mixed $id_usuario
+     * @return bool
+     */
     public function esAmigo(int $id_usuario): bool
     {
         $id_usuario_sesion = $_SESSION['user']['id'];
@@ -43,10 +55,16 @@ class AmistadesModel extends \Com\TravelMates\Core\BaseDbModel
 
         return $stmt->rowCount() > 0;
     }
-
+    
+    /**
+     * Devuelve los usuarios con los que tiene amistad el que se pasa como parámetro.
+     *
+     * @param  mixed $id_usuario
+     * @return array
+     */
     public function obtenerAmigos(int $id_usuario): array
-{
-    $stmt = $this->pdo->prepare('
+    {
+        $stmt = $this->pdo->prepare('
         SELECT 
             u.*
         FROM amistades a
@@ -58,10 +76,10 @@ class AmistadesModel extends \Com\TravelMates\Core\BaseDbModel
         WHERE a.id_usuario1 = ? OR a.id_usuario2 = ?;
     ');
 
-    $stmt->execute([$id_usuario, $id_usuario, $id_usuario]);
+        $stmt->execute([$id_usuario, $id_usuario, $id_usuario]);
 
-    return $stmt->fetchAll();
-}
+        return $stmt->fetchAll();
+    }
 
 
 

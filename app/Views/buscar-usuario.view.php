@@ -10,7 +10,7 @@
 <body>
   <div class="container mt-3">
     <div class="barra-busqueda">
-      <form action="/buscar-usuario" method="POST" class="d-flex">
+      <form action="/buscar-usuario" method="POST" class="d-flex" aria-label="busqueda">
         <input type="text" name="busqueda" class="form-control rounded-pill" placeholder="Buscar usuarios..."
           value="<?php echo isset($_POST['busqueda']) ? $_POST['busqueda'] : '' ?>" required>
         <button type="submit" class="btn btn-primary rounded-pill">

@@ -21,7 +21,7 @@
 <body id="register" class="hold-transition register-page">
     <div class="register-box">
         <div class="logo">
-            <img src="assets/img/TravelMates.png" alt="Logo TravelMates" />
+            <img src="assets/img/TravelMatesLogin.png" alt="Logo TravelMates" />
         </div>
         <div class="card">
             <div class="card-body login-card-body">

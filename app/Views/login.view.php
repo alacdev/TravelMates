@@ -15,7 +15,7 @@
     <body id="login" class="hold-transition login-page">
         <div class="login-box">
             <div class="logo">
-                <img src="assets/img/TravelMates.png" alt="Logo TravelMates"/>                
+                <img src="assets/img/TravelMatesLogin.png" alt="Logo TravelMates"/>                
             </div>
             <!-- /.login-logo -->
             <div class="card">

@@ -2,16 +2,20 @@
 
 namespace Com\TravelMates\Controllers;
 
-class ChatController extends \Com\TravelMates\Core\BaseController {
+/**
+ * ChatController
+ */
+class ChatController extends \Com\TravelMates\Core\BaseController
+{
 
-    public function mostrar() {  
-        
-        $data = array(
-            'titulo' => 'Usuarios',
-            'breadcrumb' => ['Gestión de usuarios']
-            );
-
-        $this->view->showViews(array('templates/header.view.php', 'chat.view.php', 'templates/footer.view.php'), $data);
+    /**
+     * Función que muestra la pantalla de chat
+     *
+     * @return void
+     */
+    public function mostrar()
+    {
+        $this->view->showViews(array('templates/header.view.php', 'chat.view.php', 'templates/footer.view.php'));
     }
 
 }

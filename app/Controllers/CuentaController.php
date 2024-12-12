@@ -4,17 +4,27 @@ namespace Com\TravelMates\Controllers;
 
 class CuentaController extends \Com\TravelMates\Core\BaseController
 {
-
+    
+    /**
+     * Muestra la pantalla de gestión de cuenta
+     *
+     * @return void
+     */
     public function mostrar()
     {
         $data = array(
-            'titulo' => 'Cuenta',
-            'breadcrumb' => ['Cuenta'],
             'usuario' => $_SESSION['user']
         );
         $this->view->showViews(array('templates/header.view.php', 'cuenta.view.php', 'templates/footer.view.php'), $data);
     }
-
+    
+    /**
+     * Actualiza el usuario que ha iniciado sesión con los datos introducidos en el formulario.
+     *
+     * @param  mixed $post
+     * @param  mixed $files
+     * @return void
+     */
     public function actualizarCuenta(array $post, array $files)
     {
         $imgurModel = new \Com\TravelMates\Models\ImgurModel();
@@ -34,7 +44,13 @@ class CuentaController extends \Com\TravelMates\Core\BaseController
         }
 
     }
-
+    
+    /**
+     * Comprueba que los datos introducidos en el formulario son válidos
+     *
+     * @param  mixed $post
+     * @return array
+     */
     private function checkFormActualizarCuenta(array $post): array
     {
         $userModel = new \Com\TravelMates\Models\UsuarioModel();

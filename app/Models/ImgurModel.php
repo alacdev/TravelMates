@@ -46,7 +46,16 @@ class ImgurModel extends \Com\TravelMates\Core\BaseDbModel
             return 'null';
         }
     }
-
+    
+    /**
+     * Recorta y redimensiona la imagen pasada para estandarizar todas las imágenes de la web
+     *
+     * @param  mixed $imagePath
+     * @param  mixed $outputPath
+     * @param  mixed $width
+     * @param  mixed $height
+     * @return void
+     */
     public function cropAndResizeImage($imagePath, $outputPath, $width = 500, $height = 500)
     {
         $imagick = new Imagick($imagePath);

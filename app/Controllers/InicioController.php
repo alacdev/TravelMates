@@ -4,7 +4,12 @@ namespace Com\TravelMates\Controllers;
 
 class InicioController extends \Com\TravelMates\Core\BaseController
 {
-
+    
+    /**
+     * Muestra la vista de inicio con las publicaciones tuyas y de los usuarios con los que tienes amistad.
+     *
+     * @return void
+     */
     public function inicio()
     {
         $data = array(
@@ -24,8 +29,14 @@ class InicioController extends \Com\TravelMates\Core\BaseController
 
         $this->view->showViews(array('templates/header.view.php', 'inicio.view.php', 'templates/footer.view.php'), $data);
     }
-
-    public function tiempoTranscurrido($fecha) {
+    
+    /**
+     * Función que obtiene una fecha como parámetro y devuelve la diferencia de tiempo con la fecha actual
+     *
+     * @param  mixed $fecha
+     * @return string
+     */
+    public function tiempoTranscurrido($fecha): string {
         $ahora = time();
         $publicacion = strtotime($fecha);
         $diferencia = $ahora - $publicacion;
@@ -45,12 +56,22 @@ class InicioController extends \Com\TravelMates\Core\BaseController
             return "hace " . $dias . " días";
         }
     }
-
+    
+    /**
+     * Muestra la pantalla de inicio de sesión
+     *
+     * @return void
+     */
     public function mostrarLogin()
     {
         $this->view->show('login.view.php');
     }
 
+    /**
+     * Muestra la pantalla de registro
+     *
+     * @return void
+     */
     public function mostrarRegistro()
     {
         $model = new \Com\TravelMates\Models\InteresesModel();
@@ -59,7 +80,13 @@ class InicioController extends \Com\TravelMates\Core\BaseController
         );
         $this->view->show('register.view.php', $data);
     }
-
+    
+    /**
+     * Inicia sesión si los datos del formulario pasados por post son correctos.
+     *
+     * @param  mixed $post
+     * @return void
+     */
     public function iniciarSesion(array $post)
     {
         $userModel = new \Com\TravelMates\Models\UsuarioModel();
@@ -78,6 +105,13 @@ class InicioController extends \Com\TravelMates\Core\BaseController
         }
     }
 
+        
+    /**
+     * Registra al usuario e inicia sesión si los datos introducidos en el formulario son válidos.
+     *
+     * @param  mixed $post
+     * @return void
+     */
     public function registrar(array $post)
     {
         $errores = $this->checkRegisterForm($post);
@@ -113,7 +147,13 @@ class InicioController extends \Com\TravelMates\Core\BaseController
         }
     }
 
-
+    
+    /**
+     * Comprueba que los campos del formulario son válidos
+     *
+     * @param  mixed $post
+     * @return array
+     */
     private function checkRegisterForm(array $post): array
     {
         $userModel = new \Com\TravelMates\Models\UsuarioModel();
@@ -169,11 +209,16 @@ class InicioController extends \Com\TravelMates\Core\BaseController
 
         return $errores;
     }
-
+    
+    /**
+     * Elimina la sesión actual y redirige a login
+     *
+     * @return void
+     */
     public function logout()
     {
         session_destroy();
-        header('location:/');
+        header('location:/login');
     }
 
 }

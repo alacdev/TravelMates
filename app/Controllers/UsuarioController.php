@@ -5,7 +5,13 @@ namespace Com\TravelMates\Controllers;
 use Com\TravelMates\Models\InteresesModel;
 
 class UsuarioController extends \Com\TravelMates\Core\BaseController
-{
+{    
+    /**
+     * Muestra la pantalla de visualizar usuario
+     *
+     * @param  mixed $idUsuario
+     * @return void
+     */
     public function mostrarUsuario(int $idUsuario)
     {
         $usermodel = new \Com\TravelMates\Models\UsuarioModel();
@@ -19,7 +25,12 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
 
         $this->view->showViews(array('templates/header.view.php', 'usuario.view.php', 'templates/footer.view.php'), $data);
     }
-
+    
+    /**
+     * Muestra la pantalla de gestión de usuarios
+     *
+     * @return void
+     */
     public function mostrarGestionUsuarios()
     {
         $usermodel = new \Com\TravelMates\Models\UsuarioModel();
@@ -29,17 +40,22 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
 
         $this->view->showViews(array('templates/header.view.php', 'gestion-usuarios.view.php', 'templates/footer.view.php'), $data);
     }
-
+    
+    /**
+     * Muestra la pantalla de búsqueda de usuarios
+     *
+     * @return void
+     */
     public function mostrarBuscarUsuarios()
     {
-        $usermodel = new \Com\TravelMates\Models\UsuarioModel();
-        $data = array(
-            'usuariosRecomendados' => $usermodel->obtenerUsuariosCompatibles($_SESSION['user']['id'])
-        );
-
-        $this->view->showViews(array('templates/header.view.php', 'buscar-usuario.view.php', 'templates/footer.view.php'), $data);
+        $this->view->showViews(array('templates/header.view.php', 'buscar-usuario.view.php', 'templates/footer.view.php'));
     }
-
+    
+    /**
+     * Muestra la pantalla de amigos
+     *
+     * @return void
+     */
     public function mostrarAmigos()
     {
         $amistadesModel = new \Com\TravelMates\Models\AmistadesModel();
@@ -50,6 +66,28 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
         $this->view->showViews(array('templates/header.view.php', 'amigos.view.php', 'templates/footer.view.php'), $data);
     }
 
+    /**
+     * Muestra la pantalla de editar usuario
+     *
+     * @param  mixed $id_usuario
+     * @return void
+     */
+    public function mostrarEditarUsuario(int $id_usuario)
+    {
+        $usermodel = new \Com\TravelMates\Models\UsuarioModel();
+        $data = array(
+            'usuario' => $usermodel->obtenerUsuarioPorId($id_usuario)
+        );
+
+        $this->view->showViews(array('templates/header.view.php', 'editar-usuario.view.php', 'templates/footer.view.php'), $data);
+    }
+    
+    /**
+     * Funcion que recibe por $_POST la cadena a buscar y comprueba si hay usuarios coincidentes.
+     *
+     * @param  mixed $post
+     * @return void
+     */
     public function buscarUsuarios(array $post)
     {
         $userModel = new \Com\TravelMates\Models\UsuarioModel();
@@ -67,21 +105,39 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
 
         $this->view->showViews(array('templates/header.view.php', 'buscar-usuario.view.php', 'templates/footer.view.php'), $data);
     }
-
+    
+    /**
+     * Envía una solicitud de amistad al usuario pasado como parámetro
+     *
+     * @param  mixed $id_receptor
+     * @return void
+     */
     public function enviarSolicitudAmistad(int $id_receptor)
     {
         $model = new \Com\TravelMates\Models\SolicitudesModel();
         $resultado = $model->enviarSolicitudAmistad($_SESSION['user']['id'], $id_receptor);
         echo json_encode(['success' => $resultado]);
     }
-
+    
+    /**
+     * Cancela la solicitud de amistad al usuario pasado como parámetro
+     *
+     * @param  mixed $id_receptor
+     * @return void
+     */
     public function cancelarSolicitudAmistad(int $id_receptor)
     {
         $model = new \Com\TravelMates\Models\SolicitudesModel();
         $resultado = $model->cancelarSolicitudAmistad($_SESSION['user']['id'], $id_receptor);
         echo json_encode(['success' => $resultado]);
     }
-
+    
+    /**
+     * Elimina el usuario pasado como parámetro de la bbdd
+     *
+     * @param  mixed $id_usuario
+     * @return void
+     */
     public function eliminarUsuario(int $id_usuario)
     {
         $usermodel = new \Com\TravelMates\Models\UsuarioModel();
@@ -96,17 +152,15 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
         }
         header("location:/gestion-usuarios");
     }
-
-    public function mostrarEditarUsuario(int $id_usuario)
-    {
-        $usermodel = new \Com\TravelMates\Models\UsuarioModel();
-        $data = array(
-            'usuario' => $usermodel->obtenerUsuarioPorId($id_usuario)
-        );
-
-        $this->view->showViews(array('templates/header.view.php', 'editar-usuario.view.php', 'templates/footer.view.php'), $data);
-    }
-
+    
+    /**
+     * Edita el usuario pasado como parámetro en la base de datos con los datos que llegan en $post y $files.
+     *
+     * @param  mixed $id_usuario
+     * @param  mixed $post
+     * @param  mixed $files
+     * @return void
+     */
     public function editarUsuario(int $id_usuario, array $post, array $files)
     {
         if (!empty($files['url_img']['tmp_name'])) {
@@ -128,7 +182,14 @@ class UsuarioController extends \Com\TravelMates\Core\BaseController
             }
         }
     }
-
+    
+    /**
+     * Comprueba si los datos introducidos en el formulario de editar son válidos.
+     *
+     * @param  mixed $usuario
+     * @param  mixed $post
+     * @return array
+     */
     private function checkFormEditarUsuario(array $usuario, array $post): array
     {
         $userModel = new \Com\TravelMates\Models\UsuarioModel();
