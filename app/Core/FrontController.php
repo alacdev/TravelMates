@@ -33,7 +33,7 @@ class FrontController
 
                 Route::add('/editar-usuario/([0-9]+)', function ($id_usuario) {
                     $controlador = new \Com\TravelMates\Controllers\UsuarioController();
-                    $controlador->editarUsuario($id_usuario,$_POST, isset($_FILES) && !empty($_FILES) ? $_FILES : []);
+                    $controlador->editarUsuario($id_usuario, $_POST, isset($_FILES) && !empty($_FILES) ? $_FILES : []);
                 }, 'post');
 
             }
@@ -52,7 +52,7 @@ class FrontController
                 $controlador = new \Com\TravelMates\Controllers\PublicacionController();
                 $controlador->meGusta($_SESSION['user']['id'], $id_publicacion);
             }, 'post');
-            
+
             Route::add('/no-me-gusta/([0-9]+)', function ($id_publicacion) {
                 $controlador = new \Com\TravelMates\Controllers\PublicacionController();
                 $controlador->noMeGusta($_SESSION['user']['id'], $id_publicacion);
@@ -118,14 +118,9 @@ class FrontController
                 $controlador->mostrarMapa();
             }, 'get');
 
-            Route::add('/mapa/get-marcadores', function () {
+            Route::add('/guardar-marcadores', function () {
                 $controlador = new \Com\TravelMates\Controllers\MapaController();
-                $controlador->obtenerMarcadores();
-            }, 'get');
-
-            Route::add('/mapa/add-marcador', function () {
-                $controlador = new \Com\TravelMates\Controllers\MapaController();
-                $controlador->nuevoMarcador();
+                $controlador->guardarMarcadores();
             }, 'post');
 
             // Route::add('/chat', function () {
@@ -151,36 +146,37 @@ class FrontController
             Route::pathNotFound(function () {
                 header('location:/');
             });
+        } else {
+
+            Route::add('/login', function () {
+                $controlador = new \Com\TravelMates\Controllers\InicioController();
+                $controlador->mostrarLogin();
+            }, 'get');
+
+            Route::add('/login', function () {
+                $controlador = new \Com\TravelMates\Controllers\InicioController();
+                $controlador->iniciarSesion($_POST);
+            }, 'post');
+
+            Route::add('/register', function () {
+                $controlador = new \Com\TravelMates\Controllers\InicioController();
+                $controlador->mostrarRegistro();
+            }, 'get');
+
+            Route::add('/register', function () {
+                $controlador = new \Com\TravelMates\Controllers\InicioController();
+                $controlador->registrar($_POST);
+            }, 'post');
+
+            Route::pathNotFound(function () {
+                header('location:/login');
+            });
+
+            Route::methodNotAllowed(function () {
+                $controller = new \Com\TravelMates\Controllers\ErroresController();
+                $controller->error405();
+            });
         }
-
-        Route::add('/login', function () {
-            $controlador = new \Com\TravelMates\Controllers\InicioController();
-            $controlador->mostrarLogin();
-        }, 'get');
-
-        Route::add('/login', function () {
-            $controlador = new \Com\TravelMates\Controllers\InicioController();
-            $controlador->iniciarSesion($_POST);
-        }, 'post');
-
-        Route::add('/register', function () {
-            $controlador = new \Com\TravelMates\Controllers\InicioController();
-            $controlador->mostrarRegistro();
-        }, 'get');
-
-        Route::add('/register', function () {
-            $controlador = new \Com\TravelMates\Controllers\InicioController();
-            $controlador->registrar($_POST);
-        }, 'post');
-
-        Route::pathNotFound(function () {
-            header('location:/login');
-        });
-
-        Route::methodNotAllowed(function () {
-            $controller = new \Com\TravelMates\Controllers\ErroresController();
-            $controller->error405();
-        });
 
         Route::run();
     }

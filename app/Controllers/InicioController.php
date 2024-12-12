@@ -4,7 +4,7 @@ namespace Com\TravelMates\Controllers;
 
 class InicioController extends \Com\TravelMates\Core\BaseController
 {
-    
+
     /**
      * Muestra la vista de inicio con las publicaciones tuyas y de los usuarios con los que tienes amistad.
      *
@@ -25,27 +25,28 @@ class InicioController extends \Com\TravelMates\Core\BaseController
 
         if (isset($_SESSION['user'])) {
             $data['publicaciones'] = $publicaciones;
-        }        
+        }
 
         $this->view->showViews(array('templates/header.view.php', 'inicio.view.php', 'templates/footer.view.php'), $data);
     }
-    
+
     /**
      * Función que obtiene una fecha como parámetro y devuelve la diferencia de tiempo con la fecha actual
      *
      * @param  mixed $fecha
      * @return string
      */
-    public function tiempoTranscurrido($fecha): string {
+    public function tiempoTranscurrido($fecha): string
+    {
         $ahora = time();
         $publicacion = strtotime($fecha);
         $diferencia = $ahora - $publicacion;
-    
+
         $segundos = $diferencia;
         $minutos = round($diferencia / 60);
         $horas = round($diferencia / 3600);
         $dias = round($diferencia / 86400);
-    
+
         if ($segundos < 60) {
             return "hace " . $segundos . " segundos";
         } elseif ($minutos < 60) {
@@ -56,7 +57,7 @@ class InicioController extends \Com\TravelMates\Core\BaseController
             return "hace " . $dias . " días";
         }
     }
-    
+
     /**
      * Muestra la pantalla de inicio de sesión
      *
@@ -80,7 +81,7 @@ class InicioController extends \Com\TravelMates\Core\BaseController
         );
         $this->view->show('register.view.php', $data);
     }
-    
+
     /**
      * Inicia sesión si los datos del formulario pasados por post son correctos.
      *
@@ -105,7 +106,28 @@ class InicioController extends \Com\TravelMates\Core\BaseController
         }
     }
 
-        
+    /**
+     * Inicia sesión si los datos del formulario pasados por post son correctos.
+     *
+     * @param  mixed $post
+     * @return bool
+     */
+    public function iniciarSesionTest(array $post): bool
+    {
+        $userModel = new \Com\TravelMates\Models\UsuarioModel();
+        $user = $userModel->obtenerUsuarioPorUsername($post['username']);
+        if ($user != null) {
+            if (password_verify($post['pass'], $user['pass'])) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+
     /**
      * Registra al usuario e inicia sesión si los datos introducidos en el formulario son válidos.
      *
@@ -128,7 +150,7 @@ class InicioController extends \Com\TravelMates\Core\BaseController
             if (isset($post['intereses'])) {
                 $intereses = $post['intereses'];
             }
-            
+
             $userModel = new \Com\TravelMates\Models\UsuarioModel();
             $interesesModel = new \Com\TravelMates\Models\InteresesModel();
             if ($userModel->addUser($post)) {
@@ -147,7 +169,33 @@ class InicioController extends \Com\TravelMates\Core\BaseController
         }
     }
 
-    
+    public function registrarTest(array $post): bool
+    {
+        $errores = $this->checkRegisterForm($post);
+        if (count($errores) > 0) {
+            return false;
+        } else {
+            //Hashear contraseña
+            $hashpass = password_hash($post['pass'], PASSWORD_DEFAULT);
+            unset($post['pass']);
+            unset($post['confirm_pass']);
+            $post['pass'] = $hashpass;
+
+            if (isset($post['intereses'])) {
+                $intereses = $post['intereses'];
+            }
+
+            $userModel = new \Com\TravelMates\Models\UsuarioModel();
+            $interesesModel = new \Com\TravelMates\Models\InteresesModel();
+            if ($userModel->addUser($post)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+
     /**
      * Comprueba que los campos del formulario son válidos
      *
@@ -209,7 +257,7 @@ class InicioController extends \Com\TravelMates\Core\BaseController
 
         return $errores;
     }
-    
+
     /**
      * Elimina la sesión actual y redirige a login
      *

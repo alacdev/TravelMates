@@ -4,7 +4,7 @@ namespace Com\TravelMates\Controllers;
 
 class MapaController extends \Com\TravelMates\Core\BaseController
 {
-    
+
     /**
      * Muestra la pantalla de mapa
      *
@@ -14,7 +14,7 @@ class MapaController extends \Com\TravelMates\Core\BaseController
     {
         $this->view->showViews(['templates/header.view.php', 'mapa.view.php', 'templates/footer.view.php']);
     }
-    
+
     /**
      * Obtiene los marcadores del usuario de la sesión desde la bbdd
      *
@@ -26,26 +26,33 @@ class MapaController extends \Com\TravelMates\Core\BaseController
         $marcadores = $model->obtenerMarcadores();
         echo json_encode($marcadores);
     }
-    
+
     /**
-     * Añade un marcador del usuario de la sesión en la tabla marcadores_mapa
+     * Guarda los marcadores enviados mediante POST.
      *
      * @return void
      */
-    public function nuevoMarcador()
+    public function guardarMarcadores()
     {
-        if (isset($_SESSION['user'], $_POST['latitud'], $_POST['longitud'], $_POST['mensaje'])) {
-            $id_usuario = $_SESSION['user']['id'];
-            $latitud = $_POST['latitud'];
-            $longitud = $_POST['longitud'];
-            $mensaje = $_POST['mensaje'];
+        $jsonBody = file_get_contents('php://input');        
+        $marcadores = json_decode($jsonBody, true);
 
-            $model = new \Com\TravelMates\Models\MapaModel();
-            $resultado = $model->nuevoMarcador($id_usuario, $latitud, $longitud, $mensaje);
+        if (is_array($marcadores) && count($marcadores) > 0) {
+            $mapaModel = new \Com\TravelMates\Models\MapaModel();
 
-            echo json_encode(['status' => $resultado ? 'success' : 'error']);
+            foreach ($marcadores as $marcador) {
+                if (isset($marcador['latitud'], $marcador['longitud'], $marcador['mensaje'])) {
+                    $latitud = $marcador['latitud'];
+                    $longitud = $marcador['longitud'];
+                    $mensaje = $marcador['mensaje'];
+
+                    $mapaModel->nuevoMarcador($_SESSION['user']['id'],$latitud, $longitud, $mensaje);
+                }
+            }
+
+            echo json_encode(['status' => 'success', 'message' => 'Marcadores guardados correctamente.']);
         } else {
-            echo json_encode(['status' => 'error']);
+            echo json_encode(['status' => 'error', 'message' => 'Datos inválidos.']);
         }
     }
 

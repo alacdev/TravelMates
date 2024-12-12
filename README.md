@@ -2,31 +2,30 @@
 - **Proyecto presentado por**: *Hugo Alén Acuña*
 - **Fecha**: *25/11/2024*
 
-<img width="2560" alt="Logo-TravelMates-README" src="">
-
-
 ## Resumen
 
-TravelMates es una red social diseñada específicamente para conectar a personas que comparten intereses comunes y que buscan compañeros de viaje para explorar nuevos destinos. Al crear un perfil, los usuarios pueden incluir detalles sobre sus aficiones, nacionalidad, lugar de origen, género y otros aspectos personales, lo que facilita encontrar personas con afinidades similares. La plataforma permite a los usuarios visualizar perfiles de otros viajeros y filtrar las búsquedas según criterios como intereses, destino deseado o tipo de actividad que buscan realizar.
-Además de la creación de perfiles, TravelMates ofrece herramientas de comunicación integradas, como chat en tiempo real, foros y grupos de discusión, lo que permite a los usuarios coordinarse antes del viaje y mantenerse en contacto durante el mismo. Esto fomenta un ambiente de confianza y colaboración, creando una comunidad activa de viajeros que pueden compartir experiencias, consejos y recomendaciones, haciendo más enriquecedoras sus aventuras en el camino.
-La plataforma también cuenta con una sección de blogs y artículos donde los viajeros pueden publicar sus relatos de viaje, consejos útiles y recomendaciones sobre destinos y actividades. Estos contenidos no solo enriquecen la experiencia de los usuarios, sino que también proporcionan una fuente invaluable de información para quienes están planificando sus próximos viajes. Además, TravelMates organiza eventos y encuentros locales para que los miembros puedan conocerse en persona, fortaleciendo aún más la comunidad.
-Con TravelMates, los usuarios no solo encuentran compañeros de viaje, sino que también forjan amistades duraderas y adquieren conocimientos que los ayudarán a disfrutar al máximo de sus aventuras.
+TravelMates es una red social diseñada específicamente para quienes aman viajar y explorar el mundo. La plataforma ofrece a los usuarios la posibilidad de crear, compartir y descubrir experiencias de viaje, proporcionando una forma única de conectar con otros aventureros. 
+Cada publicación, conocida como "Viaje", incluye descripciones detalladas, fotografías y recomendaciones sobre los destinos visitados, permitiendo a otros usuarios inspirarse y planificar sus propias aventuras. Además, los usuarios pueden seguir a otros viajeros, reaccionar con "me gusta" a los "Viajes", y en próximas actualizaciones, podrán comentar y comunicarse a través de un sistema de chat. 
+El desarrollo de TravelMates se llevó a cabo siguiendo una metodología ágil, basada en ciclos iterativos que incluyeron etapas de recopilación de requisitos, análisis, diseño, implementación y pruebas. Para la construcción de la plataforma, se utilizaron tecnologías web tradicionales como PHP, HTML, CSS, JavaScript y jQuery, integrando AJAX para garantizar una experiencia dinámica e interactiva. Como parte del proceso, se realizó una investigación de mercado que abarcó estudios de viabilidad técnica y económica, análisis de la competencia y encuestas dirigidas a viajeros. 
+TravelMates aspira a convertirse en una comunidad colaborativa donde los usuarios puedan intercambiar conocimientos, mejorar sus habilidades de viaje y compartir sus vivencias. La plataforma fomenta el aprendizaje mutuo y promueve la innovación y el desarrollo continuo en el ámbito del turismo y la exploración.
+
 
 **Palabras clave:**
 
-TravelMates, Viaje, Compañero, Red Social, Desarrollo Web.
+TravelMates, Viaje, Red Social, Desarrollo Web.
 
 
 ## Abstract
 
-TravelMates is a social network specifically designed to connect people who share common interests and are looking for travel companions to explore new destinations. When creating a profile, users can include details about their hobbies, nationality, place of origin, gender, and other personal aspects, making it easier to find people with similar interests. The platform allows users to view other travelers' profiles and filter searches based on criteria such as interests, desired destination, or type of activity they are looking to do.
-In addition to profile creation, TravelMates offers integrated communication tools such as real-time chat, forums, and discussion groups, allowing users to coordinate before the trip and stay in touch during the journey. This fosters an environment of trust and collaboration, creating an active community of travelers who can share experiences, tips, and recommendations, making their adventures more enriching.
-The platform also features a section for blogs and articles where travelers can post their travel stories, useful tips, and recommendations on destinations and activities. These contents not only enrich the user experience but also provide an invaluable source of information for those planning their next trips. Additionally, TravelMates organizes events and local meetups for members to meet in person, further strengthening the community.
-With TravelMates, users not only find travel companions but also forge lasting friendships and gain knowledge that will help them enjoy their adventures to the fullest. The platform is designed to create a collaborative environment where users can learn from each other, improve their skills, and share their creations.
+TravelMates is a social network specifically designed for travel enthusiasts and those interested in the world of travel. The platform allows users to create, share, and discover travel experiences, offering a unique way to connect with fellow adventurers.
+Each post, known as a "Trip", includes detailed descriptions, photos, and recommendations about the visited destinations, allowing other users to get inspired and plan their own adventures. Additionally, users can follow other travelers, like "Trips," and in future updates, they will be able to comment and chat with other users.
+The development of TravelMates followed an agile methodology, based on iterative cycles that included stages of requirement gathering, analysis, design, implementation, and testing. Traditional web technologies such as PHP, HTML, CSS, JavaScript, and jQuery were used to build the platform, integrating AJAX to ensure a dynamic and interactive experience. As part of the process, market research was conducted, including technical and economic feasibility studies, competitive analysis, and surveys directed at travelers.
+TravelMates aims to create a collaborative community where users can exchange knowledge, improve their travel skills, and share their experiences. The platform fosters mutual learning and promotes innovation and continuous development in the fields of tourism and exploration.
+
 
 **Keywords:**
 
-TravelMates, Travel, Mate, Social Network, Web Development.
+TravelMates, Travel, Social Network, Web Development.
 
 
 ***************************************************
@@ -34,14 +33,28 @@ TravelMates, Travel, Mate, Social Network, Web Development.
 
 ## 1. Introducción
 
-TravelMates busca conectar a esa gente con ganas de viajar y no tiene con quien. En una era donde viajar y empaparte de diferentes culturas está tan a la vanguardia es importante tener herramientas de este estilo. Esta aplicación tiene como fin la creación de una comunidad que pueda compartir vivencias y encontrar gente afín para crear más y mejores cada vez.
+TravelMates surge como una propuesta innovadora que busca satisfacer una necesidad creciente en el ámbito de las redes sociales y el turismo: ofrecer una plataforma específica y comunitaria para viajeros. Este tema ha sido elegido por su relevancia en un contexto donde las experiencias de viaje y la conexión entre personas con intereses comunes han cobrado gran importancia.
+El interés de este trabajo radica en la posibilidad de conectar a viajeros de todo el mundo, fomentando tanto el intercambio de información valiosa como la creación de nuevas oportunidades de colaboración y amistad. Este proyecto plantea preguntas clave: ¿cómo puede una red social transformar la experiencia de viajar? ¿Qué herramientas y características son fundamentales para los usuarios?
+El objetivo principal es desarrollar un enfoque que permita resolver estas cuestiones, diseñando una plataforma que sea útil, atractiva y práctica para los viajeros. A lo largo del desarrollo del proyecto, se buscará abordar estos problemas, definir soluciones y ofrecer una visión clara de los resultados esperados.
+
 
 
 ## 6. Bibliografía
 
-Stack Overflow - where developers learn, share, & build careers. (s. f.). Stack Overflow. https://stackoverflow.com/ 
+ImageMagick – Mastering Digital Image Alchemy https://imagemagick.org/script/index.php 
 
-Font awesome. (s. f.). Font Awesome. https://fontawesome.com/ 
+Imgur API https://apidocs.imgur.com/
+
+OpenStreetMap API https://wiki.openstreetmap.org/wiki/API
+
+OpenCage Geocoding API https://opencagedata.com/
+
+MDN Web Docs https://developer.mozilla.org/en-US/
+
+FontAwesome https://fontawesome.com/
+
+Stack Overflow https://stackoverflow.com/
+
 
 
 
